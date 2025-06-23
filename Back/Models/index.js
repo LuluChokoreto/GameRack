@@ -40,7 +40,7 @@ User.init({
   name: { type: DataTypes.STRING(32), allowNull: false },
   email: { type: DataTypes.STRING(48), allowNull: false, unique: true },
   password: { type: DataTypes.STRING(255), allowNull: false },
-  role: {type: DataTypes.STRING(32), allowNull: false, defaultValue: 'user'},
+  role: { type: DataTypes.STRING(32), allowNull: false, defaultValue: 'user' },
   code: { type: DataTypes.STRING(32), allowNull: false, unique: true },
 }, {
   sequelize,
@@ -51,10 +51,46 @@ User.init({
 
 User.beforeValidate(async (user) => {
   user.code = await generateUniqueCode(User);
-  console.log('Code généré:', user.code);
 });
+
+class Game extends Model {}
+Game.init({
+  id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
+  name: { type: DataTypes.STRING(32), allowNull: false },
+  image: { type: DataTypes.STRING(255), allowNull: false },
+  rating: { type: DataTypes.INTEGER, allowNull: false },
+  platform: { type: DataTypes.STRING(32), allowNull: false },
+  review: { type: DataTypes.STRING(255), allowNull: false, unique: true },
+  code: { type: DataTypes.STRING(32), allowNull: false, unique: true }
+}, {
+  sequelize,
+  modelName: 'Game',
+  tableName: 'games',
+  timestamps: false,
+});
+
+
+class Todo extends Model {}
+Todo.init({}, {
+  sequelize,
+  modelName: 'Todo',
+  tableName: 'todos',
+  timestamps: false,
+});
+
+class Wish extends Model {}
+Wish.init({}, {
+  sequelize,
+  modelName: 'Wish',
+  tableName: 'wishes',
+  timestamps: false,
+});
+
 
 module.exports = {
   sequelize,
   User,
+  Game,
+  Todo,
+  Wish
 };

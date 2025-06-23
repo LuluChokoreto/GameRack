@@ -1,7 +1,9 @@
 const axios = require('axios');
+const { Game } = require('../Models/index.js');
+const jwt = require('jsonwebtoken');
 
-
-class Game {
+class Games {
+    //api RAWG
     static async getGame(page = 1) {
         try {
             const data= await axios.get(`${process.env.APIURL}?key=${process.env.APIKEY}&page_size=20&page=${page}`);
@@ -9,8 +11,7 @@ class Game {
         } catch (error) {
             throw new Error('Failed to fetch games');
         }
-        }
-
+    }
 
     static async getAllGames(page = 1) {
         try{
@@ -31,6 +32,7 @@ class Game {
             throw new Error('Failed to fetch all games');
         }
     }
+
     static async searchGames(query) {
         try {
             const data = await axios.get(`${process.env.APIURL}?key=${process.env.APIKEY}&search=${query}`);
@@ -51,6 +53,25 @@ class Game {
             throw new Error('Failed to search games');
         }
     }
+
+    //Your own API
+    static async addFinishGame({name, image, rating, platform, review, token}) {
+        try {
+            const code = token.code;
+            const game = await Game.create({
+                name,
+                image,
+                rating,
+                platform,
+                review,
+                code: code
+            });
+            return game;
+        } catch (error) {
+            throw new Error('Failed to add game');
+        }
+    }
+
 }
 
-module.exports = Game;
+module.exports = Games;
