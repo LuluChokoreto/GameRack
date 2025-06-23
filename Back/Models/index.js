@@ -1,0 +1,59 @@
+const { Sequelize, DataTypes, Model } = require('sequelize');
+
+const sequelize = new Sequelize(
+  process.env.DBNAME,
+  process.env.DBUSER,
+  process.env.DBPASS,
+  {
+    host: process.env.DBHOST,
+    dialect: 'mysql',
+    logging: false,
+  }
+);
+
+const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+async function generateUniqueCode(UserModel) {
+  function generateRandomCode(length = 4) {
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return result;
+  }
+
+  let code;
+  let exists = true;
+
+  while (exists) {
+    code = generateRandomCode();
+    const existing = await UserModel.findOne({ where: { code } });
+    exists = !!existing;
+  }
+
+  return code;
+}
+
+class User extends Model {}
+User.init({
+  id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
+  name: { type: DataTypes.STRING(32), allowNull: false },
+  email: { type: DataTypes.STRING(48), allowNull: false, unique: true },
+  password: { type: DataTypes.STRING(255), allowNull: false },
+  code: { type: DataTypes.STRING(32), allowNull: false, unique: true },
+}, {
+  sequelize,
+  modelName: 'User',
+  tableName: 'users',
+  timestamps: false,
+});
+
+User.beforeValidate(async (user) => {
+  user.code = await generateUniqueCode(User);
+  console.log('Code généré:', user.code);
+});
+
+module.exports = {
+  sequelize,
+  User,
+};
