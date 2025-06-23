@@ -71,18 +71,34 @@ Game.init({
 
 
 class Todo extends Model {}
-Todo.init({}, {
+Todo.init({
+  id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
+  name: { type: DataTypes.STRING(32), allowNull: false },
+  image: { type: DataTypes.STRING(255), allowNull: false },
+  rating: { type: DataTypes.INTEGER, allowNull: true },
+  platform: { type: DataTypes.STRING(32), allowNull: false },
+  review: { type: DataTypes.STRING(255), allowNull: true, unique: true },
+  code: { type: DataTypes.STRING(32), allowNull: false, unique: true }
+}, {
   sequelize,
   modelName: 'Todo',
-  tableName: 'todos',
+  tableName: 'todo',
   timestamps: false,
 });
 
 class Wish extends Model {}
-Wish.init({}, {
+Wish.init({
+  id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
+  name: { type: DataTypes.STRING(32), allowNull: false },
+  image: { type: DataTypes.STRING(255), allowNull: false },
+  rating: { type: DataTypes.INTEGER, allowNull: true },
+  platform: { type: DataTypes.STRING(32), allowNull: true },
+  review: { type: DataTypes.STRING(255), allowNull: true, unique: true },
+  code: { type: DataTypes.STRING(32), allowNull: false, unique: true }
+}, {
   sequelize,
   modelName: 'Wish',
-  tableName: 'wishes',
+  tableName: 'wish',
   timestamps: false,
 });
 
