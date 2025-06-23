@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GameRack – Discover Games</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo-area">
+      <img src="image/gamerack_logo.png" alt="GameRack Logo" class="logo-img" />
+      <h1>GameRack</h1>
+    </div>
+    <nav>
+      <a href="#">Discover</a>
+      <a href="#">My Library</a>
+      <a href="#">Reviews</a>
+      <a href="#">Community</a>
+    </nav>
+  </header>
+
+  <div class="main">
+    <section class="content">
+      <h2>Discover Games</h2>
+      <p class="slogan">Track Your Games. Build Your Collection.</p>
+
+      <div class="search-bar">
+        <input type="text" placeholder="Search games..." />
+        <select>
+          <option>All Platforms</option>
+          <option>PC</option>
+          <option>PS5</option>
+          <option>Switch</option>
+        </select>
+        <select>
+          <option>All Years</option>
+          <option>2024</option>
+          <option>2023</option>
+          <option>2022</option>
+        </select>
+      </div>
+
+      <div class="game-grid">
+        <a href="game.html" class="game-card">
+          <div class="game-cover">Zelda BOTW</div>
+          <div class="game-info">
+            <span class="badge">Nintendo Switch</span>
+            <h3>The Legend of Zelda: Breath of the Wild</h3>
+            <p>Completed · ★★★★★</p>
+          </div>
+        </a>
+
+        <a href="game.html" class="game-card">
+          <div class="game-cover">Elden Ring</div>
+          <div class="game-info">
+            <span class="badge">PC</span>
+            <h3>Elden Ring</h3>
+            <p>Completed · ★★★★☆</p>
+          </div>
+        </a>
+
+        <a href="game.html" class="game-card">
+          <div class="game-cover">Hades</div>
+          <div class="game-info">
+            <span class="badge">PC</span>
+            <h3>Hades</h3>
+            <p>Backlog · ★★★★★</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <aside class="sidebar">
+      <h3>Recent Activity</h3>
+      <div class="activity">
+        GameMaster92 completed <b>Elden Ring</b><br>
+        2 hours ago
+      </div>
+      <div class="activity">
+        RetroStocklog started <b>Metroid Dread</b><br>
+        4 hours ago
+      </div>
+      <div class="activity">
+        IndieExplorer rated <b>Hollow Knight</b> 5 stars<br>
+        6 hours ago
+      </div>
+
+      <h3>Trending Games</h3>
+      <div class="trending">
+        <span>1. Baldur's Gate 3</span>
+        <span>2. Spider-Man 2</span>
+        <span>3. Alan Wake 2</span>
+      </div>
+    </aside>
+  </div>
+
+</body>
+</html>
