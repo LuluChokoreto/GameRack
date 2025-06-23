@@ -33,14 +33,22 @@ router.get('/user', async (req, res) => {
 
 router.post('/add', async (req, res) => {
   try {
-    const { name, email, password } = req.body;
-    const user = await Users.addUser({ name, email, password });
+    const { name, email, password, role } = req.body;
+    const user = await Users.addUser({ name, email, password, role });
     res.json(user);
   } catch (error) {
     res.status(400).json({ erreur: error.message });
   }
-}
-);
+});
 
+router.post('/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const { user, token } = await Users.loginUser({ email, password });
+    res.json({ user, token });
+  } catch (error) {
+    res.status(400).json({ erreur: error.message });
+   }
+});
 
 module.exports = router;

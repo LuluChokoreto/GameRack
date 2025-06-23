@@ -40,6 +40,7 @@ User.init({
   name: { type: DataTypes.STRING(32), allowNull: false },
   email: { type: DataTypes.STRING(48), allowNull: false, unique: true },
   password: { type: DataTypes.STRING(255), allowNull: false },
+  role: {type: DataTypes.STRING(32), allowNull: false, defaultValue: 'user'},
   code: { type: DataTypes.STRING(32), allowNull: false, unique: true },
 }, {
   sequelize,
