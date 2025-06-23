@@ -71,6 +71,24 @@ class Games {
             throw new Error('Failed to add game');
         }
     }
+    
+    static async deleteGame(name, token) {
+        try {
+            const code = token.code;
+            const game = await Game.destroy({
+                where: {
+                    name: name,
+                    code: code
+                }
+            });
+            if (game === 0) {
+                throw new Error('Game not found or not owned by user');
+            }
+            return { message: 'Game deleted successfully' };
+        } catch (error) {
+            throw new Error('Failed to delete game');
+        }
+    }
 
 }
 

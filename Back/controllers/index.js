@@ -59,8 +59,18 @@ router.post('/addgame', async (req, res) => {
   try {
     const { name, image, rating, platform, review, token } = req.body;
     const decodedToken = jwt.verify(token, process.env.JWTSECRET);
-    console.log(decodedToken);
     const game = await Games.addFinishGame({ name, image, rating, platform, review, token: decodedToken });
+    res.json(game);
+  } catch (error) {
+    res.status(400).json({ erreur: error.message });
+  }
+});
+
+router.post('/deletegame', async (req, res) => {
+  try {
+    const { name, token } = req.body;
+    const decodedToken = jwt.verify(token, process.env.JWTSECRET);
+    const game = await Games.deleteGame(name, decodedToken);
     res.json(game);
   } catch (error) {
     res.status(400).json({ erreur: error.message });
