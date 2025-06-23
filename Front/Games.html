@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>GameRack – Track Your Games. Build Your Collection.</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -14,13 +16,16 @@
       <img src="image/gamerack_logo.png" alt="GameRack Logo" class="logo-img" />
     </div>
     <nav>
-      <a href="#">My Library</a>
+      <a href="#"><i class="bi bi-person-circle"></i> My Library</a>
+      <a href="#">Log in</a>
+      <a href="#">Register</a>
+      <a href="Games.html">Games</a>
     </nav>
   </header>
 
   <div class="main">
     <section class="content">
-      <h2>Track Your Games. Build Your Collection.</h2>
+      <h2 class="pixel-font">Track Your Games. Build Your Collection.</h2>
       <div class="search-bar">
         <input type="text" placeholder="Search games..." />
         <select>
@@ -38,7 +43,7 @@
       </div>
 
       <div class="game-grid">
-        <a href="game.html" class="game-card">
+        <a href="game_card.html" class="game-card">
           <div class="game-cover">Zelda BOTW</div>
           <div class="game-info">
             <span class="badge">Nintendo Switch</span>
@@ -47,7 +52,7 @@
           </div>
         </a>
 
-        <a href="game.html" class="game-card">
+        <a href="game_card.html" class="game-card">
           <div class="game-cover">Elden Ring</div>
           <div class="game-info">
             <span class="badge">PC</span>
@@ -56,7 +61,7 @@
           </div>
         </a>
 
-        <a href="game.html" class="game-card">
+        <a href="game_card.html" class="game-card">
           <div class="game-cover">Hades</div>
           <div class="game-info">
             <span class="badge">PC</span>
@@ -77,5 +82,11 @@
     </aside>
   </div>
 
+
 </body>
+
+  <footer class="footer">
+    <p>&copy; 2025 GameRack. Tous droits réservés. <a href="#">Mentions légales</a></p>
+  </footer>
+
 </html>
