@@ -7,11 +7,19 @@ const Users = require('../Fonctions/user.js');
 router.use(express.json());
 
 router.get('/game', async (req, res) => {
-   res.json(await Game.getAllGames(req.query.page));
+   try{
+      res.json(await Game.getAllGames(req.query.page));
+   } catch (error) {
+      res.status(400).json({ erreur: error.message });
+   }
 });
 
 router.get('/search', async (req, res) => {
-   res.json(await Game.searchGames(req.query.game));
+   try{
+      res.json(await Game.searchGames(req.query.game));
+   } catch (error) {
+      res.status(400).json({ erreur: error.message });
+   }
 });
 
 router.get('/user', async (req, res) => {
