@@ -3,7 +3,7 @@ body {
     font-family: 'Inter', sans-serif;
     background-color: #121212;
     color: #f0f0f0;
-    font-size: 18px;
+    font-size: 25px;
 }
 
 .navbar {
@@ -21,8 +21,8 @@ body {
 }
 
 .logo-img {
-    height: 40px;
-    width: 100%;
+    height: 100%;
+    width: 60%;
     object-fit: cover;
     border-radius: 6px;
 }
@@ -33,10 +33,16 @@ body {
 }
 
 .navbar nav a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     color: #aaa;
-    font-size: 1rem;
-    margin-left: 2rem;
+    font-size: 2rem;
     text-decoration: none;
+}
+
+.navbar nav a i {
+    font-size: 1.2rem;
 }
 
 .navbar nav a:hover {
@@ -59,7 +65,7 @@ body {
     padding: 1.5rem;
     border-radius: 10px;
     height: fit-content;
-    font-size: 1rem;
+    font-size: 1.5rem;
 }
 
 .search-bar {
@@ -74,7 +80,7 @@ input, select {
     border: none;
     color: #fff;
     border-radius: 5px;
-    font-size: 1rem;
+    font-size: 1.5rem;
 }
 
 .slogan {
@@ -124,19 +130,19 @@ input, select {
 }
 
 .game-info p {
-    font-size: 0.85rem;
+    font-size: 1rem;
     color: #aaa;
 }
 
 .game-info h3 {
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     margin: 0.5rem 0 0.25rem 0;
 }
 
 .badge {
     background-color: #333;
     padding: 2px 6px;
-    font-size: 0.7rem;
+    font-size: 1rem;
     border-radius: 4px;
     margin-bottom: 5px;
     display: inline-block;
@@ -146,9 +152,9 @@ input, select {
     margin-bottom: 1rem;
 }
 
-.sidebar .activity,
+
 .sidebar .trending {
-    font-size: 0.85rem;
+    font-size: 1.2rem;
     margin-bottom: 1rem;
     color: #ccc;
 }
@@ -156,4 +162,20 @@ input, select {
 .sidebar .trending span {
     display: block;
     margin-top: 0.5rem;
+}
+
+
+.footer {
+    background-color: #1f1f1f;
+    color: #777;
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.9rem;
+    margin-top: 3rem;
+    border-top: 1px solid #333;
+}
+
+.footer a {
+    color: #aaa;
+    text-decoration: underline;
 }
