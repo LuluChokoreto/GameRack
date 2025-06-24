@@ -1,6 +1,5 @@
 const axios = require('axios');
 const { Game } = require('../Models/index.js');
-const jwt = require('jsonwebtoken');
 
 class Games {
     //api RAWG
