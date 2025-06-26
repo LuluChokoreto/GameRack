@@ -9,4 +9,4 @@ app.use('/', require('./controllers/index.js'));
 
 app.listen(process.env.SERVERPORT, () => {
     console.log(`Server is running on port ${process.env.SERVERPORT}`);
-})
+}) 
