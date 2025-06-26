@@ -26,6 +26,15 @@ router.get('/search', async (req, res) => {
    }
 });
 
+router.get("/specificGame", async (req, res) => {
+   try {
+      res.json(await Games.getSpecificGame(req.query.id));
+   } catch (error) {
+      res.status(400).json({ erreur: error.message });
+      
+   }
+})
+
 router.get('/wish', async (req,res) =>{
    try {
       res.json(await Wishes.getAllWishes(req.query.token));
