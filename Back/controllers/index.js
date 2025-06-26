@@ -43,6 +43,15 @@ router.get('/comingSoon', async (req, res) => {
    }
 })
 
+router.get('/filter', async (req, res) => {
+   try {
+      const {platform, date}=req.query;
+      res.json(await Games.filterGames(platform, date));
+   } catch (error) {
+      res.status(400).json({ erreur: error.message });
+   }
+})
+
 router.get('/platform', async (req, res) => {
    try {
       res.json(await Games.getAllPlatforms());

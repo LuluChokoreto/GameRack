@@ -125,7 +125,41 @@ class Games {
             throw new Error('Failed to fetch platforms');
         }
     }
-    static async filterGames({platforms, order}) {
+
+    static async filterGames({idPlatforms =null, date= null}) {
+        try {
+            let url = `${process.env.APIURL}?key=${process.env.APIKEY}`;
+            if(idPlatforms){
+                url += `&platforms=${idPlatforms}`;
+            }else if(date){
+            const date = new Date();
+            date.setDate(date.getDate() + 1);
+            const endDate = new Date(date);
+            endDate.setDate(endDate.getDate() + 30);
+
+            const formatDate = d => d.toISOString().split('T')[0];
+            const dateRange = `${formatDate(date)},${formatDate(endDate)}`;
+            url += `&dates=${dateRange}`;
+            }
+            const data = await axios.get(url);
+            const gamesData = data.data.results;
+            const games = Array.isArray(gamesData)
+                ? gamesData.map(game => ({
+                    id: game.id,
+                    name: game.name,
+                    image: game.background_image || null,
+                    metacritic: game.metacritic || null,
+                    release_date: game.released || null,
+                    platforms: game.platforms ? game.platforms.map(platform => platform.platform.name) : [],
+                    genres: game.genres ? game.genres.map(genre => genre.name) : [],
+                    tags: game.tags ? game.tags.map(tag => tag.name) : []
+                }))
+                : [];
+
+            return games;
+        } catch (error) {
+            throw new Error('Failed to filter games');
+        }
     }
     
     //Your own API
