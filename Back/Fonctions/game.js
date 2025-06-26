@@ -78,6 +78,34 @@ class Games {
         }
     }
 
+    static async getComingSoonGames() {
+        try {
+            const date = new Date();
+            date.setDate(date.getDate() + 1);
+            const endDate = new Date(date);
+            endDate.setDate(endDate.getDate() + 30);
+
+            const formatDate = d => d.toISOString().split('T')[0];
+            const dateRange = `${formatDate(date)},${formatDate(endDate)}`;
+
+            const order = 'released';
+            const data = await axios.get(`${process.env.APIURL}?key=${process.env.APIKEY}&dates=${dateRange}&ordering=${order}`);
+            const gamesData = data.data.results;
+            console.log(gamesData);
+            const games = Array.isArray(gamesData)
+                ? gamesData.map(game => ({
+                    id: game.id,
+                    name: game.name,
+                    image: game.background_image || null,
+                    release_date: game.released || null,
+                }))
+                : [];
+                return games;
+        } catch (error) {
+            throw new Error('Failed to fetch coming soon games');
+        }
+    }
+
     //Your own API
     static async addFinishGame({name, image, rating, platform, review, token}) {
         try {

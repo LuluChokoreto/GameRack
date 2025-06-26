@@ -35,6 +35,14 @@ router.get("/specificGame", async (req, res) => {
    }
 })
 
+router.get('/comingSoon', async (req, res) => {
+   try {
+      res.json(await Games.getComingSoonGames());
+   } catch (error) {
+      res.status(400).json({ erreur: error.message });
+   }
+})
+
 router.get('/wish', async (req,res) =>{
    try {
       res.json(await Wishes.getAllWishes(req.query.token));
