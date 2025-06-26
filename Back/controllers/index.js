@@ -9,7 +9,7 @@ const Todos = require('../Fonctions/todo.js');
 
 router.use(express.json());
 
-//route Get
+//route Get RAWG
 router.get('/game', async (req, res) => {
    try{
       res.json(await Games.getAllGames(req.query.page));
@@ -43,6 +43,17 @@ router.get('/comingSoon', async (req, res) => {
    }
 })
 
+router.get('/platform', async (req, res) => {
+   try {
+      res.json(await Games.getAllPlatforms());
+   } catch (error) {
+      res.status(400).json({ erreur: error.message });
+   }
+})
+
+
+
+//route Get Your Api
 router.get('/wish', async (req,res) =>{
    try {
       res.json(await Wishes.getAllWishes(req.query.token));

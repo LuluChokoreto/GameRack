@@ -106,6 +106,28 @@ class Games {
         }
     }
 
+    static async getAllPlatforms(){
+        try {
+            const url = process.env.APIURL.replace(/game(s)?/i, 'platforms');
+            const [page1, page2] = await Promise.all([
+            axios.get(`${url}?key=${process.env.APIKEY}&page=1`),
+            axios.get(`${url}?key=${process.env.APIKEY}&page=2`)
+            ]);
+            const allResults = [...page1.data.results, ...page2.data.results];
+            
+            return allResults.map(platform => ({
+            id: platform.id,
+            name: platform.name,
+            slug: platform.slug
+        }));
+            
+        } catch (error) {
+            throw new Error('Failed to fetch platforms');
+        }
+    }
+    static async filterGames({platforms, order}) {
+    }
+    
     //Your own API
     static async addFinishGame({name, image, rating, platform, review, token}) {
         try {
