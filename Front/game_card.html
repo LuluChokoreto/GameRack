@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GameRack – Zelda</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <title id="page-title">GameRack – Game</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -14,51 +13,21 @@
       <img src="image/gamerack_logo.png" alt="GameRack Logo" class="logo-img" />
     </div>
     <nav>
-      <a href="#"><i class="bi bi-person-circle"></i> My Library</a>
+      <a href="#">My Library</a>
       <a href="#">Log in</a>
       <a href="#">Register</a>
       <a href="Games.html">Games</a>
     </nav>
   </header>
 
-
-  <div class="game-detail">
-    <img src="image/zelda_cover.jpg" alt="Zelda cover" class="game-banner" />
-
-    <div class="game-info">
-      <h1>The Legend of Zelda: Breath of the Wild</h1>
-      <span class="badge">Nintendo Switch</span>
-
-      <p class="game-description">
-        Explore the vast world of Hyrule in this open-world adventure. Discover shrines, defeat enemies, and uncover secrets.
-      </p>
-
-      <div class="game-actions">
-        <button class="btn" onclick="addToCollection()">Ajouter à ma collection</button>
-        <button class="btn" onclick="rateGame()">Noter ★★★★★</button>
-        <button class="btn" onclick="commentGame()">Commenter</button>
-      </div>
-    </div>
-  </div>
+  <main class="game-detail" id="gameDetail">
+    <!-- Contenu injecté dynamiquement ici -->
+  </main>
 
   <footer class="footer">
     <p>&copy; 2025 GameRack. Tous droits réservés. <a href="#">Mentions légales</a></p>
   </footer>
 
-  <script>
-    // Simuler un appel à un backend
-    async function addToCollection() {
-      const res = await fetch('/api/games/zelda-botw/add', { method: 'POST' });
-      alert('Jeu ajouté à votre collection (simulation)');
-    }
-
-    function rateGame() {
-      alert('Fonction de notation à venir...');
-    }
-
-    function commentGame() {
-      alert('Fonction de commentaire à venir...');
-    }
-  </script>
+  <script src="./Script/game_detail.js" defer></script>
 </body>
 </html>

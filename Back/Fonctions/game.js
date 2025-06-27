@@ -35,10 +35,11 @@ class Games {
 
     static async searchGames(query) {
         try {
-            const data = await axios.get(`${process.env.APIURL}?key=${process.env.APIKEY}&search=${query}`);
+            const data = await axios.get(`${process.env.APIURL}?key=${process.env.APIKEY}&search=${query}&search_precise=true`);
             const gamesData = data.data.results;
             const games = Array.isArray(gamesData)
                 ? gamesData.map(game => ({
+                    id: game.id,
                     name: game.name,
                     image: game.background_image || null,
                     metacritic: game.metacritic || null,
@@ -61,6 +62,7 @@ class Games {
                 id: data.data.id,
                 name: data.data.name,
                 image: data.data.background_image || null,
+                second_image: data.data.background_image_additional || null,
                 metacritic: data.data.metacritic || null,
                 release_date: data.data.released || null,
                 platforms: data.data.platforms ? data.data.platforms.map(platform => platform.platform.name) : [],

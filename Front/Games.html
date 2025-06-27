@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="data:,">
-  <script src="script.js"></script>
+  <script src="./Script/script.js"></script>
 </head>
 
 <body>
@@ -19,7 +19,7 @@
       <img src="image/gamerack_logo.png" alt="GameRack Logo" class="logo-img" />
     </div>
     <nav>
-      <a href="#"><i class="bi bi-person-circle"></i> My Library</a>
+      <a href="#">My Library</a>
       <a href="#">Log in</a>
       <a href="#">Register</a>
       <a href="Games.html">Games</a>
@@ -32,7 +32,7 @@
     <h2 class="pixel-font">Track Your Games. Build Your Collection.</h2>
 
     <div class="search-bar">
-      <input type="text" placeholder="Search games..." />
+      <input type="search" id="searchBar" placeholder="Search a game..." />
       <select>
         <option>All Platforms</option>
         <option>PC</option>
@@ -45,6 +45,7 @@
         <option>2023</option>
         <option>2022</option>
       </select>
+      <button id="searchBtn" class="search-btn">Search</button>
     </div>
 
     <div class="game-grid"></div>
