@@ -98,3 +98,42 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+async function fetchComingSoon() {
+  try {
+    const response = await fetch('http://localhost:3000/comingSoon');
+    const games = await response.json();
+
+    const listContainer = document.querySelector('.gl-list-column:nth-child(1) ul');
+    listContainer.innerHTML = '';
+
+    games.forEach(game => {
+      const li = document.createElement('li');
+
+      const img = document.createElement('img');
+      img.src = game.image || 'image/placeholder.jpg';
+      img.alt = game.name || 'Game image';
+
+      const span = document.createElement('span');
+      const titleSpan = document.createElement('span');
+      titleSpan.className = 'title';
+      titleSpan.textContent = game.name;
+
+      const dateSpan = document.createElement('span');
+      dateSpan.className = 'date';
+      dateSpan.textContent = game.release_date;
+
+      span.appendChild(titleSpan);
+      span.appendChild(dateSpan);
+      li.appendChild(img);
+      li.appendChild(span);
+
+      listContainer.appendChild(li);
+    });
+  } catch (error) {
+    console.error('Erreur lors du chargement des Coming Soon:', error);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  fetchComingSoon();
+});
