@@ -94,9 +94,29 @@ class Games {
                     image: game.background_image || null,
                 }))
                 : [];
+                console.log(games);
             return games;
         }catch (error) {
             throw new Error('Failed to fetch random game');
+        }
+    }
+
+    static async getBestGames() {
+        try {
+        const ordering = '-rating';
+        const data = await axios.get(`${process.env.APIURL}?key=${process.env.APIKEY}&page_size=6&ordering=${ordering}&exclude_additions=true&metacritic=90,100`);
+        const gamesData = data.data.results;
+        const games = Array.isArray(gamesData)
+            ? gamesData.map(game => ({
+                id: game.id,
+                name: game.name,
+                image: game.background_image || null,
+                metacritic: game.metacritic || null,
+            }))
+            : [];
+            return games;
+        } catch (error) {
+            throw new Error('Failed to fetch best games');
         }
     }
 

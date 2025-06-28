@@ -35,6 +35,14 @@ router.get('/random', async (req, res) => {
    }
 });
 
+router.get('/best', async (req, res) => {
+   try {
+      res.json(await Games.getBestGames());
+   } catch (error) {
+      res.status(400).json({ erreur: error.message });
+   }
+});
+
 
 
 router.get("/specificGame", async (req, res) => {
