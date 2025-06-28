@@ -90,6 +90,16 @@ router.get('/devGame', async (req, res) => {
       res.status(400).json({ erreur: error.message });
    }
 })
+router.get('/userGame', async (req, res)=> {
+   try {
+      const decodedToken = jwt.verify(req.query.token, process.env.JWTSECRET);
+      const { code } = decodedToken;
+      res.json(await Games.getUserGames(code));
+   } catch (error) {
+      res.status(400).json({ erreur: error.message });
+      
+   }
+})
 
 router.get('/wish', async (req,res) =>{
    try {

@@ -94,7 +94,6 @@ class Games {
                     image: game.background_image || null,
                 }))
                 : [];
-                console.log(games);
             return games;
         }catch (error) {
             throw new Error('Failed to fetch random game');
@@ -120,7 +119,6 @@ class Games {
         }
     }
 
-
     static async getComingSoonGames() {
         try {
             const date = new Date();
@@ -134,7 +132,6 @@ class Games {
             const order = 'released';
             const data = await axios.get(`${process.env.APIURL}?key=${process.env.APIKEY}&dates=${dateRange}&ordering=${order}`);
             const gamesData = data.data.results;
-            console.log(gamesData);
             const games = Array.isArray(gamesData)
                 ? gamesData.map(game => ({
                     id: game.id,
@@ -206,6 +203,21 @@ class Games {
     }
     
     //Your own API
+    static async getUserGames(code){
+        try {
+            const games = await Game.findAll({
+                where: {
+                    code: code
+                },
+                attributes: ['name', 'image', 'rating', 'platform', 'review']
+            });
+            return games
+        } catch (error) {
+            throw new Error('Failed to fetch user games');
+        }
+
+    }
+
     static async addFinishGame({name, image, rating, platform, review, token}) {
         try {
             const code = token.code;
