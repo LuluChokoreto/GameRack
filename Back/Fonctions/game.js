@@ -94,6 +94,7 @@ class Games {
                     image: game.background_image || null,
                 }))
                 : [];
+            return games;
         }catch (error) {
             throw new Error('Failed to fetch random game');
         }
