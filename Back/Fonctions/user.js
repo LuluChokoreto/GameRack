@@ -38,7 +38,7 @@ static async loginUser({email, password}) {
     if (!isPasswordValid) {
       throw new Error('Invalid password');
     }
-    const token = jwt.sign({ id: user.id, code: user.code }, process.env.JWTSECRET);
+    const token = jwt.sign({ id: user.id, code: user.code, role: user.role }, process.env.JWTSECRET);
     return { user, token };
   } catch (error) {
     throw new Error('Failed to login user');
