@@ -6,6 +6,7 @@ const Games = require('../Fonctions/game.js');
 const Users = require('../Fonctions/user.js');
 const Wishes = require('../Fonctions/wish.js');
 const Todos = require('../Fonctions/todo.js');
+const DevGame = require('../Fonctions/devGame.js');
 
 router.use(express.json());
 
@@ -84,7 +85,7 @@ router.get('/platform', async (req, res) => {
 //route Get Your Api
 router.get('/devGame', async (req, res) => {
    try {
-      res.json(await Games.getAllDevGames());
+      res.json(await DevGame.getAllDevGames());
    } catch (error) {
       res.status(400).json({ erreur: error.message });
    }
