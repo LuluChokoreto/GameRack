@@ -146,7 +146,7 @@ class Games {
         }
     }
 
-    static async getAllPlatforms(){
+    /**  static async getAllPlatforms(){
         try {
             const url = process.env.APIURL.replace(/game(s)?/i, 'platforms');
             const [page1, page2] = await Promise.all([
@@ -201,7 +201,7 @@ class Games {
             throw new Error('Failed to filter games');
         }
     }
-    
+    */
     //Your own API
     static async getUserGames(code){
         try {
@@ -209,7 +209,6 @@ class Games {
                 where: {
                     code: code
                 },
-                attributes: ['name', 'image', 'rating', 'platform', 'review']
             });
             return games
         } catch (error) {
@@ -218,16 +217,17 @@ class Games {
 
     }
 
-    static async addFinishGame({name, image, rating, platform, review, token}) {
+    // ADD
+    static async addFinishGame({name, image, rating, platform, review, token, status= "finish"}) {
         try {
-            const code = token.code;
             const game = await Game.create({
                 name,
                 image,
+                status,
                 rating,
                 platform,
                 review,
-                code: code
+                code: token
             });
             return game;
         } catch (error) {
@@ -235,13 +235,66 @@ class Games {
         }
     }
     
+    static async addWish({name, image, token, status= "wish"}) {
+        try {
+            const game = await Game.create({
+                name,
+                image,
+                status,
+                code: token
+            });
+            return game;
+        } catch (error) {
+            throw new Error('Failed to add wish');
+        }
+
+    }
+    
+    static async addTodo({name, image, platform, token, status= "todo"}) {
+        try {
+            const game = await Game.create({
+                name,
+                image,
+                status,
+                platform,
+                code: token
+            });
+            return game;
+        } catch (error) {
+            throw new Error('Failed to add todo');
+        }
+    }
+
+    // UPDATE
+    static async updateStatus(name, rating=null, platform=null, review=null, token) {
+        try {
+            if( rating && review && platform){
+               return await Game.update(
+                    { status: "finish", rating: rating, platform: platform, review: review },
+                    { where: { name: name, code: token } }
+                );
+            }else if(platform){
+               return await Game.update(
+                    { status: "todo" ,platform: platform },
+                    { where: { name: name, code: token } }
+                );
+            }else{
+                throw new Error('Invalid parameters for game status update');
+            }
+
+        } catch (error) {
+            throw new Error('Failed to update game status');
+        }
+    }
+
+    // DELETE
     static async deleteGame(name, token) {
         try {
-            const code = token.code;
             const game = await Game.destroy({
                 where: {
                     name: name,
-                    code: code
+                    code: token,
+                    status: "finish"
                 }
             });
             if (game === 0) {
@@ -250,6 +303,54 @@ class Games {
             return { message: 'Game deleted successfully' };
         } catch (error) {
             throw new Error('Failed to delete game');
+        }
+    }
+    
+    static async deleteWish(name, token) {
+        try {
+            const wish = await Game.destroy({
+                where: {
+                    name: name,
+                    code: token,
+                    status: "wish"
+                }
+            });
+            if (wish === 0) {
+                throw new Error('Wish not found or not owned by user');
+            }
+            return { message: 'Wish deleted successfully' };
+        } catch (error) {
+            throw new Error('Failed to delete wish');
+        }
+    }
+
+    static async deleteTodo(name, token) {
+        try {
+            const todo = await Game.destroy({
+                where: {
+                    name: name,
+                    code: token,
+                    status: "todo"
+                }
+            });
+            if (todo === 0) {
+                throw new Error('Todo not found or not owned by user');
+            }
+            return { message: 'Todo deleted successfully' };
+        } catch (error) {
+            throw new Error('Failed to delete todo');
+        }
+    }
+
+    static async deleteReview(name, review) {
+        try {
+            const review = await Game.update(
+                { review: null },
+                { where: { name: name, review: review, status: "finish" } }
+            );
+            return { message: 'Review deleted successfully' };
+        } catch (error) {
+            throw new Error('Failed to delete review');
         }
     }
 

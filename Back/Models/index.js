@@ -59,9 +59,9 @@ Game.init({
   name: { type: DataTypes.STRING(32), allowNull: false },
   image: { type: DataTypes.STRING(255), allowNull: false },
   status: { type: DataTypes.STRING(32), allowNull: false},
-  rating: { type: DataTypes.INTEGER, allowNull: false },
-  platform: { type: DataTypes.STRING(32), allowNull: false },
-  review: { type: DataTypes.STRING(255), allowNull: false, unique: true },
+  rating: { type: DataTypes.INTEGER, allowNull: true },
+  platform: { type: DataTypes.STRING(32), allowNull: true },
+  review: { type: DataTypes.STRING(255), allowNull: true, unique: true },
   code: { type: DataTypes.STRING(32), allowNull: false}
 }, {
   sequelize,
