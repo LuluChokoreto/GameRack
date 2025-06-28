@@ -26,6 +26,17 @@ router.get('/search', async (req, res) => {
    }
 });
 
+router.get('/random', async (req, res) => {
+   try {
+      const games = await Games.getRandomGame();
+      res.json(games);
+   } catch (error) {
+      res.status(400).json({ erreur: error.message });
+   }
+});
+
+
+
 router.get("/specificGame", async (req, res) => {
    try {
       res.json(await Games.getSpecificGame(req.query.id));
@@ -63,6 +74,14 @@ router.get('/platform', async (req, res) => {
 
 
 //route Get Your Api
+router.get('/devGame', async (req, res) => {
+   try {
+      res.json(await Games.getAllDevGames());
+   } catch (error) {
+      res.status(400).json({ erreur: error.message });
+   }
+})
+
 router.get('/wish', async (req,res) =>{
    try {
       res.json(await Wishes.getAllWishes(req.query.token));
