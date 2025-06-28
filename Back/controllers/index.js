@@ -6,6 +6,7 @@ const Games = require('../Fonctions/game.js');
 const Users = require('../Fonctions/user.js');
 const Wishes = require('../Fonctions/wish.js');
 const Todos = require('../Fonctions/todo.js');
+const DevGame = require('../Fonctions/devGame.js');
 
 router.use(express.json());
 
@@ -25,6 +26,25 @@ router.get('/search', async (req, res) => {
       res.status(400).json({ erreur: error.message });
    }
 });
+
+router.get('/random', async (req, res) => {
+   try {
+      const games = await Games.getRandomGame();
+      res.json(games);
+   } catch (error) {
+      res.status(400).json({ erreur: error.message });
+   }
+});
+
+router.get('/best', async (req, res) => {
+   try {
+      res.json(await Games.getBestGames());
+   } catch (error) {
+      res.status(400).json({ erreur: error.message });
+   }
+});
+
+
 
 router.get("/specificGame", async (req, res) => {
    try {
@@ -63,6 +83,14 @@ router.get('/platform', async (req, res) => {
 
 
 //route Get Your Api
+router.get('/devGame', async (req, res) => {
+   try {
+      res.json(await DevGame.getAllDevGames());
+   } catch (error) {
+      res.status(400).json({ erreur: error.message });
+   }
+})
+
 router.get('/wish', async (req,res) =>{
    try {
       res.json(await Wishes.getAllWishes(req.query.token));
