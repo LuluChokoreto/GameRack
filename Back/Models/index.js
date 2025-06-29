@@ -77,7 +77,7 @@ Dev_Games.init({
   gameName: { type: DataTypes.STRING(255), allowNull: false },
   devName: { type: DataTypes.STRING(255), allowNull: false },
   img: { type: DataTypes.STRING(255), allowNull: false },
-  realese_date: { type: DataTypes.STRING(32), allowNull: false },
+  release_date: { type: DataTypes.STRING(32), allowNull: false },
 }, {
   sequelize,
   modelName: 'Dev_Games',
@@ -96,12 +96,12 @@ async function insertDefaultDevGames() {
   const count = await Dev_Games.count();
   if (count === 0) {
     await Dev_Games.bulkCreate([
-      { id: 1, gameGame: "Grand Theft Auto: San Andreas", devName: "Alfredo", img: "Grand Theft Auto: San Andreas.jpg", realse_date: "2015-05-19" },
-      { id: 2, gameGame: "Cyberpunk 2077", devName: "Alfredo", img: "cyberpunk2077.jpg", realse_date: "2020-12-10" },
-      { id: 3, gameGame: "Minecraft", devName: "Tristan", img: "Minecraft.jpg", realse_date: "2022-02-25" },
-      { id: 4, gameGame: "Terraria", devName: "Tristan", img: "Terraria.jpg", realse_date: "2018-04-20" },
-      { id: 5, gameGame: "Hollow Knight", devName: "Ryan", img: "hollowknight.jpg", realse_date: "2017-02-24" },
-      { id: 6, gameGame: "League of Legends", devName: "Ryan", img: "League of Legends.jpg", realse_date: "2009-10-27" },
+      { gameName: "Grand Theft Auto: San Andreas", devName: "Alfredo", img: "Grand Theft Auto: San Andreas.jpg", release_date: "2015-05-19" },
+      { gameName: "Cyberpunk 2077", devName: "Alfredo", img: "cyberpunk2077.jpg", release_date: "2020-12-10" },
+      { gameName: "Minecraft", devName: "Tristan", img: "Minecraft.jpg", release_date: "2022-02-25" },
+      { gameName: "Terraria", devName: "Tristan", img: "Terraria.jpg", release_date: "2018-04-20" },
+      { gameName: "Hollow Knight", devName: "Ryan", img: "hollowknight.jpg", release_date: "2017-02-24" },
+      { gameName: "League of Legends", devName: "Ryan", img: "League of Legends.jpg", release_date: "2009-10-27" },
     ]);
     console.log("Données Dev_Games insérées !");
   }

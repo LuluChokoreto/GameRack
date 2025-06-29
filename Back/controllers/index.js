@@ -4,8 +4,6 @@ const jwt = require('jsonwebtoken');
 
 const Games = require('../Fonctions/game.js');
 const Users = require('../Fonctions/user.js');
-const Wishes = require('../Fonctions/wish.js');
-const Todos = require('../Fonctions/todo.js');
 const DevGame = require('../Fonctions/devGame.js');
 
 router.use(express.json());
@@ -170,7 +168,7 @@ router.post('/deleteWish', async (req, res) => {
    try {
       const { name, token } = req.body;
       const decodedToken = jwt.verify(token, process.env.JWTSECRET);
-      const wish = await Wishes.deleteWish(name, decodedToken.code);
+      const wish = await Games.deleteWish(name, decodedToken.code);
       res.json(wish);
    } catch (error) {
       res.status(400).json({ erreur: error.message });
@@ -181,7 +179,7 @@ router.post('/deleteTodo', async (req, res) => {
    try {
       const { name, token } = req.body;
       const decodedToken = jwt.verify(token, process.env.JWTSECRET);
-      const todo = await Todos.deleteTodo(name, decodedToken.code);
+      const todo = await Games.deleteTodo(name, decodedToken.code);
       res.json(todo);
    } catch (error) {
       res.status(400).json({ erreur: error.message });
