@@ -97,6 +97,11 @@ body {
   margin-bottom: 15px;
   color: #4db8ff;
 }
+.gl-columns-container {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
 
 .gl-lists {
   display: flex;
@@ -104,6 +109,11 @@ body {
   align-items: stretch;
   flex-wrap: wrap;
   padding: 2rem;
+}
+
+body.light-mode .gl-list-column {
+  background-color: #ffffff;
+  color: #111;
 }
 
 .gl-list-column {
@@ -119,11 +129,11 @@ body {
 }
 
 .gl-list-column h4 {
-  font-size: 1.1rem;
+  margin-top: 0;
   margin-bottom: 1rem;
-  color: #f1c40f;
+  font-size: 1.2rem;
+  text-align: left; 
 }
-
 .gl-list-column ul {
   list-style: none;
   padding: 0;
