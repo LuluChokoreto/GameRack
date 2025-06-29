@@ -1,0 +1,101 @@
+/* Bouton mode */
+.mode-btn {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 1rem;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.mode-btn:hover {
+  background-color: #555;
+}
+
+/* Light mode global */
+body.light-mode {
+  background-color: #f5f5f5;
+  color: #111;
+}
+
+body.light-mode .gl-header,
+body.light-mode .gl-footer,
+body.light-mode .navbar,
+body.light-mode footer {
+  background-color: #ffffff;
+  border-color: #ddd;
+}
+
+body.light-mode .gl-nav a,
+body.light-mode nav a {
+  color: #111;
+}
+
+body.light-mode .gl-nav a:hover,
+body.light-mode nav a:hover {
+  color: #f1c40f;
+}
+
+body.light-mode .game-card {
+  background-color: #ffffff;
+}
+
+body.light-mode .tab-btn {
+  background-color: #eee;
+  color: #111;
+}
+
+body.light-mode .tab-btn.active {
+  background-color: #f1c40f;
+  color: #111;
+}
+
+body.light-mode .tab-btn:hover {
+  background-color: #f1c40f;
+  color: #111;
+}
+
+.gl-footer {
+  background-color: #1a1a1a;
+  color: #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  flex-wrap: wrap;
+  margin-top: auto;
+  width: 100%;
+}
+
+.gl-footer .left-links a {
+  margin-right: 1rem;
+  color: #ccc;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.gl-footer .left-links a:hover {
+  color: #f1c40f;
+}
+
+.gl-footer .right-icons img {
+  margin-left: 1rem;
+  width: 24px;
+  height: 24px;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.gl-footer .right-icons img:hover {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .gl-footer {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+}

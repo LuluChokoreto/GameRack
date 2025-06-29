@@ -140,4 +140,4 @@ async function insertDefaultDevGames() {
   }
 }
 
-sequelize.sync().then(insertDefaultDevGames);
+// sequelize.sync().then(insertDefaultDevGames);

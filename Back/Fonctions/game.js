@@ -112,6 +112,7 @@ class Games {
                 name: game.name,
                 image: game.background_image || null,
                 metacritic: game.metacritic || null,
+                release_date: game.released || null,
             }))
             : [];
             return games;
