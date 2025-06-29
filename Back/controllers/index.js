@@ -4,8 +4,6 @@ const jwt = require('jsonwebtoken');
 
 const Games = require('../Fonctions/game.js');
 const Users = require('../Fonctions/user.js');
-const Wishes = require('../Fonctions/wish.js');
-const Todos = require('../Fonctions/todo.js');
 const DevGame = require('../Fonctions/devGame.js');
 
 router.use(express.json());
