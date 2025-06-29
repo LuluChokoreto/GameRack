@@ -96,12 +96,12 @@ async function insertDefaultDevGames() {
   const count = await Dev_Games.count();
   if (count === 0) {
     await Dev_Games.bulkCreate([
-      { id: 1, gameGame: "Grand Theft Auto: San Andreas", devName: "Alfredo", img: "Grand Theft Auto: San Andreas.jpg", realse_date: "2015-05-19" },
-      { id: 2, gameGame: "Cyberpunk 2077", devName: "Alfredo", img: "cyberpunk2077.jpg", realse_date: "2020-12-10" },
-      { id: 3, gameGame: "Minecraft", devName: "Tristan", img: "Minecraft.jpg", realse_date: "2022-02-25" },
-      { id: 4, gameGame: "Terraria", devName: "Tristan", img: "Terraria.jpg", realse_date: "2018-04-20" },
-      { id: 5, gameGame: "Hollow Knight", devName: "Ryan", img: "hollowknight.jpg", realse_date: "2017-02-24" },
-      { id: 6, gameGame: "League of Legends", devName: "Ryan", img: "League of Legends.jpg", realse_date: "2009-10-27" },
+      { id: 1, gameGame: "Grand Theft Auto: San Andreas", devName: "Alfredo", img: "Grand Theft Auto: San Andreas.jpg", realese_date: "2015-05-19" },
+      { id: 2, gameGame: "Cyberpunk 2077", devName: "Alfredo", img: "cyberpunk2077.jpg", realese_date: "2020-12-10" },
+      { id: 3, gameGame: "Minecraft", devName: "Tristan", img: "Minecraft.jpg", realese_date: "2022-02-25" },
+      { id: 4, gameGame: "Terraria", devName: "Tristan", img: "Terraria.jpg", realese_date: "2018-04-20" },
+      { id: 5, gameGame: "Hollow Knight", devName: "Ryan", img: "hollowknight.jpg", realese_date: "2017-02-24" },
+      { id: 6, gameGame: "League of Legends", devName: "Ryan", img: "League of Legends.jpg", realese_date: "2009-10-27" },
     ]);
     console.log("Données Dev_Games insérées !");
   }
