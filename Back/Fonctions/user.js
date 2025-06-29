@@ -28,7 +28,7 @@ class Users{
     }
 }
 
-static async loginUser({email, password}) {
+  static async loginUser({email, password}) {
   try {
     const user = await User.findOne({ where: { email } });
     if (!user) {
@@ -43,7 +43,18 @@ static async loginUser({email, password}) {
   } catch (error) {
     throw new Error('Failed to login user');
   }
-}
+  }
 
+  static async updateRole(email){
+    try {
+      const user = await User.update(
+        { role: 'admin' }, 
+        { where: { email } }
+      )
+      return user;
+    } catch (error) {
+      throw new Error('Failed to update user role');
+    }
+  }
 }
 module.exports = Users;

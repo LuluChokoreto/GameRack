@@ -58,10 +58,11 @@ Game.init({
   id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
   name: { type: DataTypes.STRING(32), allowNull: false },
   image: { type: DataTypes.STRING(255), allowNull: false },
-  rating: { type: DataTypes.INTEGER, allowNull: false },
-  platform: { type: DataTypes.STRING(32), allowNull: false },
-  review: { type: DataTypes.STRING(255), allowNull: false, unique: true },
-  code: { type: DataTypes.STRING(32), allowNull: false, unique: true }
+  status: { type: DataTypes.STRING(32), allowNull: false},
+  rating: { type: DataTypes.INTEGER, allowNull: true },
+  platform: { type: DataTypes.STRING(32), allowNull: true },
+  review: { type: DataTypes.STRING(255), allowNull: true, unique: true },
+  code: { type: DataTypes.STRING(32), allowNull: false}
 }, {
   sequelize,
   modelName: 'Game',
@@ -70,45 +71,13 @@ Game.init({
 });
 
 
-class Todo extends Model {}
-Todo.init({
-  id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-  name: { type: DataTypes.STRING(32), allowNull: false },
-  image: { type: DataTypes.STRING(255), allowNull: false },
-  rating: { type: DataTypes.INTEGER, allowNull: true },
-  platform: { type: DataTypes.STRING(32), allowNull: false },
-  review: { type: DataTypes.STRING(255), allowNull: true, unique: true },
-  code: { type: DataTypes.STRING(32), allowNull: false, unique: true }
-}, {
-  sequelize,
-  modelName: 'Todo',
-  tableName: 'todo',
-  timestamps: false,
-});
-
-class Wish extends Model {}
-Wish.init({
-  id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-  name: { type: DataTypes.STRING(32), allowNull: false },
-  image: { type: DataTypes.STRING(255), allowNull: false },
-  rating: { type: DataTypes.INTEGER, allowNull: true },
-  platform: { type: DataTypes.STRING(32), allowNull: true },
-  review: { type: DataTypes.STRING(255), allowNull: true, unique: true },
-  code: { type: DataTypes.STRING(32), allowNull: false, unique: true }
-}, {
-  sequelize,
-  modelName: 'Wish',
-  tableName: 'wish',
-  timestamps: false,
-});
-
 class Dev_Games extends Model {}
 Dev_Games.init({
   id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-  gameGame: { type: DataTypes.STRING(255), allowNull: false },
+  gameName: { type: DataTypes.STRING(255), allowNull: false },
   devName: { type: DataTypes.STRING(255), allowNull: false },
   img: { type: DataTypes.STRING(255), allowNull: false },
-  realse_date: { type: DataTypes.DATE, allowNull: false },
+  realese_date: { type: DataTypes.STRING(32), allowNull: false },
 }, {
   sequelize,
   modelName: 'Dev_Games',
@@ -120,8 +89,6 @@ module.exports = {
   sequelize,
   User,
   Game,
-  Todo,
-  Wish,
   Dev_Games
 };
 
@@ -140,4 +107,4 @@ async function insertDefaultDevGames() {
   }
 }
 
-// sequelize.sync().then(insertDefaultDevGames);
+sequelize.sync().then(insertDefaultDevGames);
