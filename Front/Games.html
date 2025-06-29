@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GameRack – Track Your Games. Build Your Collection.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:,">
+  <script src="script.js"></script>
+</head>
+
+<body>
+
+  <header class="navbar">
+    <div class="logo-area">
+      <img src="image/gamerack_logo.png" alt="GameRack Logo" class="logo-img" />
+    </div>
+    <nav>
+      <a href="#"><i class="bi bi-person-circle"></i> My Library</a>
+      <a href="#">Log in</a>
+      <a href="#">Register</a>
+      <a href="Games.html">Games</a>
+    </nav>
+  </header>
+
+<main class="main-layout">
+  <!-- Contenu principal à gauche -->
+  <section class="content">
+    <h2 class="pixel-font">Track Your Games. Build Your Collection.</h2>
+
+    <div class="search-bar">
+      <input type="text" placeholder="Search games..." />
+      <select>
+        <option>All Platforms</option>
+        <option>PC</option>
+        <option>PS5</option>
+        <option>Switch</option>
+      </select>
+      <select>
+        <option>All Years</option>
+        <option>2024</option>
+        <option>2023</option>
+        <option>2022</option>
+      </select>
+    </div>
+
+    <div class="game-grid"></div>
+
+    <div class="pagination">
+      <button id="prevBtn">← Précédent</button>
+      <span id="currentPage">Page 1</span>
+      <button id="nextBtn">Suivant →</button>
+    </div>
+  </section>
+
+  <!-- Sidebar à droite -->
+  <aside class="sidebar">
+    <h3>🔥 Trending Games</h3>
+    <ul class="trending">
+      <li>1. Baldur's Gate 3</li>
+      <li>2. Spider-Man 2</li>
+      <li>3. Alan Wake 2</li>
+    </ul>
+  </aside>
+</main>
+
+  <footer class="footer">
+    <p>&copy; 2025 GameRack. Tous droits réservés. <a href="#">Mentions légales</a></p>
+  </footer>
+
+</html>
