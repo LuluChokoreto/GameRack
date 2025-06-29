@@ -172,6 +172,25 @@ button[type="submit"]:hover {
   text-decoration: underline;
 }
 
+
+.mode-btn-fixed {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 9999;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.mode-btn-fixed:hover {
+  background-color: #555;
+}
+
 /* Responsive pour mobile/tablette */
 @media (max-width: 768px) {
   body {
