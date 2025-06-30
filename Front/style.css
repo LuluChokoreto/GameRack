@@ -314,6 +314,7 @@ input, select {
 .pagination button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+<<<<<<< HEAD
 }
 
 .top-banner {

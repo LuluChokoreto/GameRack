@@ -28,7 +28,7 @@ class Users{
     }
 }
 
-static async loginUser({email, password}) {
+  static async loginUser({email, password}) {
   try {
     const user = await User.findOne({ where: { email } });
     if (!user) {
@@ -38,12 +38,24 @@ static async loginUser({email, password}) {
     if (!isPasswordValid) {
       throw new Error('Invalid password');
     }
-    const token = jwt.sign({ id: user.id, code: user.code }, process.env.JWTSECRET);
-    return { user, token };
+    const token = jwt.sign({ id: user.id, code: user.code, role: user.role }, process.env.JWTSECRET);
+    const name = user.name;
+    return { name, token };
   } catch (error) {
     throw new Error('Failed to login user');
   }
-}
+  }
 
+  static async updateRole(email){
+    try {
+      const user = await User.update(
+        { role: 'admin' }, 
+        { where: { email } }
+      )
+      return user;
+    } catch (error) {
+      throw new Error('Failed to update user role');
+    }
+  }
 }
 module.exports = Users;

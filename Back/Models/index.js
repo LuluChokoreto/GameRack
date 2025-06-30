@@ -58,10 +58,11 @@ Game.init({
   id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
   name: { type: DataTypes.STRING(32), allowNull: false },
   image: { type: DataTypes.STRING(255), allowNull: false },
-  rating: { type: DataTypes.INTEGER, allowNull: false },
-  platform: { type: DataTypes.STRING(32), allowNull: false },
-  review: { type: DataTypes.STRING(255), allowNull: false, unique: true },
-  code: { type: DataTypes.STRING(32), allowNull: false, unique: true }
+  status: { type: DataTypes.STRING(32), allowNull: false},
+  rating: { type: DataTypes.INTEGER, allowNull: true },
+  platform: { type: DataTypes.STRING(32), allowNull: true },
+  review: { type: DataTypes.STRING(255), allowNull: true, unique: true },
+  code: { type: DataTypes.STRING(32), allowNull: false}
 }, {
   sequelize,
   modelName: 'Game',
@@ -70,43 +71,40 @@ Game.init({
 });
 
 
-class Todo extends Model {}
-Todo.init({
+class Dev_Games extends Model {}
+Dev_Games.init({
   id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-  name: { type: DataTypes.STRING(32), allowNull: false },
-  image: { type: DataTypes.STRING(255), allowNull: false },
-  rating: { type: DataTypes.INTEGER, allowNull: true },
-  platform: { type: DataTypes.STRING(32), allowNull: false },
-  review: { type: DataTypes.STRING(255), allowNull: true, unique: true },
-  code: { type: DataTypes.STRING(32), allowNull: false, unique: true }
+  gameName: { type: DataTypes.STRING(255), allowNull: false },
+  devName: { type: DataTypes.STRING(255), allowNull: false },
+  img: { type: DataTypes.STRING(255), allowNull: false },
+  realese_date: { type: DataTypes.STRING(32), allowNull: false },
 }, {
   sequelize,
-  modelName: 'Todo',
-  tableName: 'todo',
+  modelName: 'Dev_Games',
+  tableName: 'dev_games',
   timestamps: false,
 });
-
-class Wish extends Model {}
-Wish.init({
-  id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-  name: { type: DataTypes.STRING(32), allowNull: false },
-  image: { type: DataTypes.STRING(255), allowNull: false },
-  rating: { type: DataTypes.INTEGER, allowNull: true },
-  platform: { type: DataTypes.STRING(32), allowNull: true },
-  review: { type: DataTypes.STRING(255), allowNull: true, unique: true },
-  code: { type: DataTypes.STRING(32), allowNull: false, unique: true }
-}, {
-  sequelize,
-  modelName: 'Wish',
-  tableName: 'wish',
-  timestamps: false,
-});
-
 
 module.exports = {
   sequelize,
   User,
   Game,
-  Todo,
-  Wish
+  Dev_Games
 };
+
+async function insertDefaultDevGames() {
+  const count = await Dev_Games.count();
+  if (count === 0) {
+    await Dev_Games.bulkCreate([
+      { gameName: "Grand Theft Auto: San Andreas", devName: "Alfredo", img: "Grand Theft Auto: San Andreas.jpg", realese_date: "2015-05-19" },
+      { gameName: "Cyberpunk 2077", devName: "Alfredo", img: "cyberpunk2077.jpg", realese_date: "2020-12-10" },
+      { gameName: "Minecraft", devName: "Tristan", img: "Minecraft.jpg", realese_date: "2022-02-25" },
+      { gameName: "Terraria", devName: "Tristan", img: "Terraria.jpg", realese_date: "2018-04-20" },
+      { gameName: "Hollow Knight", devName: "Ryan", img: "hollowknight.jpg", realese_date: "2017-02-24" },
+      { gameName: "League of Legends", devName: "Ryan", img: "League of Legends.jpg", realese_date: "2009-10-27" },
+    ]);
+    console.log("Données Dev_Games insérées !");
+  }
+}
+
+sequelize.sync().then(insertDefaultDevGames);

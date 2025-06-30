@@ -33,9 +33,17 @@ class Games {
         }
     }
 
-    static async searchGames(query) {
+    static async searchGames(query=null, platform = null, release_date = null) {
         try {
-            const data = await axios.get(`${process.env.APIURL}?key=${process.env.APIKEY}&search=${query}&search_precise=true`);
+
+            let url = `${process.env.APIURL}?key=${process.env.APIKEY}`;
+            if (query) url += `&search=${encodeURIComponent(query)}&search_precise=true`;
+            if (platform) url += `&platforms=${encodeURIComponent(platform)}`;
+            if (release_date){
+                const date = `${release_date}-01-01,${release_date}-12-31`;
+                url += `&dates=${encodeURIComponent(date)}`;
+            } 
+            const data = await axios.get(url);
             const gamesData = data.data.results;
             const games = Array.isArray(gamesData)
                 ? gamesData.map(game => ({
@@ -80,6 +88,48 @@ class Games {
         }
     }
 
+    static async getRandomGame() {
+        try {
+            const totalGames = 888734;
+            const totalPages = Math.floor(totalGames / 6);
+
+            const randomPage = Math.floor(Math.random() * totalPages) + 1;
+
+            const data = await axios.get(`${process.env.APIURL}?key=${process.env.APIKEY}&page_size=6&page=${randomPage}`);
+            const gamesData = data.data.results;
+            const games = Array.isArray(gamesData)
+                ? gamesData.map(game => ({
+                    id: game.id,
+                    name: game.name,
+                    image: game.background_image || null,
+                }))
+                : [];
+            return games;
+        }catch (error) {
+            throw new Error('Failed to fetch random game');
+        }
+    }
+
+    static async getBestGames() {
+        try {
+        const ordering = '-rating';
+        const data = await axios.get(`${process.env.APIURL}?key=${process.env.APIKEY}&page_size=6&ordering=${ordering}&exclude_additions=true&metacritic=90,100`);
+        const gamesData = data.data.results;
+        const games = Array.isArray(gamesData)
+            ? gamesData.map(game => ({
+                id: game.id,
+                name: game.name,
+                image: game.background_image || null,
+                metacritic: game.metacritic || null,
+                release_date: game.released || null,
+            }))
+            : [];
+            return games;
+        } catch (error) {
+            throw new Error('Failed to fetch best games');
+        }
+    }
+
     static async getComingSoonGames() {
         try {
             const date = new Date();
@@ -93,7 +143,6 @@ class Games {
             const order = 'released';
             const data = await axios.get(`${process.env.APIURL}?key=${process.env.APIKEY}&dates=${dateRange}&ordering=${order}`);
             const gamesData = data.data.results;
-            console.log(gamesData);
             const games = Array.isArray(gamesData)
                 ? gamesData.map(game => ({
                     id: game.id,
@@ -128,7 +177,7 @@ class Games {
         }
     }
 
-    static async filterGames({idPlatforms =null, date= null}) {
+    /**static async filterGames({idPlatforms =null, date= null}) {
         try {
             let url = `${process.env.APIURL}?key=${process.env.APIKEY}`;
             if(idPlatforms){
@@ -163,18 +212,33 @@ class Games {
             throw new Error('Failed to filter games');
         }
     }
-    
+    */
     //Your own API
-    static async addFinishGame({name, image, rating, platform, review, token}) {
+    static async getUserGames(code){
         try {
-            const code = token.code;
+            const games = await Game.findAll({
+                where: {
+                    code: code
+                },
+            });
+            return games
+        } catch (error) {
+            throw new Error('Failed to fetch user games');
+        }
+
+    }
+
+    // ADD
+    static async addFinishGame({name, image, rating, platform, review, token, status= "finish"}) {
+        try {
             const game = await Game.create({
                 name,
                 image,
+                status,
                 rating,
                 platform,
                 review,
-                code: code
+                code: token
             });
             return game;
         } catch (error) {
@@ -182,13 +246,66 @@ class Games {
         }
     }
     
+    static async addWish({name, image, token, status= "wish"}) {
+        try {
+            const game = await Game.create({
+                name,
+                image,
+                status,
+                code: token
+            });
+            return game;
+        } catch (error) {
+            throw new Error('Failed to add wish');
+        }
+
+    }
+    
+    static async addTodo({name, image, platform, token, status= "todo"}) {
+        try {
+            const game = await Game.create({
+                name,
+                image,
+                status,
+                platform,
+                code: token
+            });
+            return game;
+        } catch (error) {
+            throw new Error('Failed to add todo');
+        }
+    }
+
+    // UPDATE
+    static async updateStatus(name, rating=null, platform=null, review=null, token) {
+        try {
+            if( rating && review && platform){
+               return await Game.update(
+                    { status: "finish", rating: rating, platform: platform, review: review },
+                    { where: { name: name, code: token } }
+                );
+            }else if(platform){
+               return await Game.update(
+                    { status: "todo" ,platform: platform },
+                    { where: { name: name, code: token } }
+                );
+            }else{
+                throw new Error('Invalid parameters for game status update');
+            }
+
+        } catch (error) {
+            throw new Error('Failed to update game status');
+        }
+    }
+
+    // DELETE
     static async deleteGame(name, token) {
         try {
-            const code = token.code;
             const game = await Game.destroy({
                 where: {
                     name: name,
-                    code: code
+                    code: token,
+                    status: "finish"
                 }
             });
             if (game === 0) {
@@ -197,6 +314,54 @@ class Games {
             return { message: 'Game deleted successfully' };
         } catch (error) {
             throw new Error('Failed to delete game');
+        }
+    }
+    
+    static async deleteWish(name, token) {
+        try {
+            const wish = await Game.destroy({
+                where: {
+                    name: name,
+                    code: token,
+                    status: "wish"
+                }
+            });
+            if (wish === 0) {
+                throw new Error('Wish not found or not owned by user');
+            }
+            return { message: 'Wish deleted successfully' };
+        } catch (error) {
+            throw new Error('Failed to delete wish');
+        }
+    }
+
+    static async deleteTodo(name, token) {
+        try {
+            const todo = await Game.destroy({
+                where: {
+                    name: name,
+                    code: token,
+                    status: "todo"
+                }
+            });
+            if (todo === 0) {
+                throw new Error('Todo not found or not owned by user');
+            }
+            return { message: 'Todo deleted successfully' };
+        } catch (error) {
+            throw new Error('Failed to delete todo');
+        }
+    }
+
+    static async deleteReview(name, review) {
+        try {
+            const review = await Game.update(
+                { review: null },
+                { where: { name: name, review: review, status: "finish" } }
+            );
+            return { message: 'Review deleted successfully' };
+        } catch (error) {
+            throw new Error('Failed to delete review');
         }
     }
 
