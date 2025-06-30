@@ -159,6 +159,7 @@ async function deleteGameFromCollection(game) {
     const token = localStorage.getItem('token');
     let url = '';
     let body = { name: game.name, token };
+    console.log(game.status);
 
     if (game.status === 'finish') {
         url = 'http://localhost:3000/deleteGame';
@@ -171,6 +172,7 @@ async function deleteGameFromCollection(game) {
         return;
     }
 
+    console.log(body);
     if (confirm(`Supprimer "${game.name}" de votre collection ?`)) {
         await fetch(url, {
             method: 'POST',
@@ -208,5 +210,14 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.removeItem('token');
             window.location.href = 'main.html';
         });
+    }
+
+    // Remplace le titre par le nom de l'utilisateur
+    const username = localStorage.getItem('name');
+    if (username) {
+        const userTitle = document.getElementById('user-title');
+        if (userTitle) {
+            userTitle.textContent = `Bienvenue, ${username}!`;
+        }
     }
 })

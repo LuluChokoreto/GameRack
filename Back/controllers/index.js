@@ -70,8 +70,6 @@ router.get('/platform', async (req, res) => {
    }
 })
 
-
-
 //route Get Your Api
 router.get('/devGame', async (req, res) => {
    try {
@@ -94,7 +92,8 @@ router.get('/userGame', async (req, res)=> {
 
 router.get('/review', async (req, res) => {
    try {
-      res.json(await Games.getAllReview())
+      res.json(await Games.getAllReview(req.query.name));
+
    } catch (error) {
       res.status(400).json({erreur: error.message})
 
