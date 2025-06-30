@@ -68,8 +68,8 @@ async function login() {
         console.log("Result",result);
         
         if (!result.erreur ) {
-            localStorage.setItem('token', result);// changer result en result.token
-            //localStorage.setItem('name', result.name);
+            localStorage.setItem('token', result.token);
+            localStorage.setItem('name', result.user);
             alert('Connexion réussie !');
             window.location.href = 'main.html';
         } else {
