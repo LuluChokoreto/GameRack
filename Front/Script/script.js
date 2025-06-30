@@ -48,14 +48,25 @@ async function fetchGames(page = 1) {
 }
 
 async function searchGames(query) {
-  if (!query) {
-    // Si la recherche est vide, on affiche la page courante normalement
+  // Récupère les valeurs sélectionnées dans les filtres
+  const platformSelect = document.getElementById('platformFilter');
+  const genreSelect = document.getElementById('genreFilter');
+  const selectedPlatform = platformSelect ? platformSelect.value : '';
+  const selectedGenre = genreSelect ? genreSelect.value : '';
+
+  if (!query && !selectedPlatform && !selectedGenre) {
+    // Si la recherche et les filtres sont vides, on affiche la page courante normalement
     fetchGames(currentPage);
     return;
   }
 
   try {
-    const response = await fetch(`http://localhost:3000/search?game=${encodeURIComponent(query)}`);
+    // Construit l'URL avec les filtres
+    let url = `http://localhost:3000/search?game=${encodeURIComponent(query || '')}`;
+    if (selectedPlatform) url += `&platform=${encodeURIComponent(selectedPlatform)}`;
+    if (selectedGenre) url += `&genre=${encodeURIComponent(selectedGenre)}`;
+
+    const response = await fetch(url);
     const data = await response.json();
     console.log(data)
     const games = Array.isArray(data) ? data : data.games;

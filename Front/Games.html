@@ -15,13 +15,15 @@
 <body>
 
   <header class="navbar">
-    <div class="logo-area">
-      <img src="image/gamerack_logo.png" alt="GameRack Logo" class="logo-img" />
-    </div>
+<div class="logo-area">
+  <a href="main.html">
+    <img src="image/gamerack_logo.png" alt="GameRack Logo" class="logo-img" />
+  </a>
+</div>
     <nav>
-      <a href="#">My Library</a>
-      <a href="#">Log in</a>
-      <a href="#">Register</a>
+      <a href="mylibrary.html">My Library</a>
+      <a href="login.html">Log in</a>
+      <a href="register.html">Register</a>
       <a href="Games.html">Games</a>
     </nav>
   </header>
@@ -33,17 +35,22 @@
 
     <div class="search-bar">
       <input type="search" id="searchBar" placeholder="Search a game..." />
-      <select>
-        <option>All Platforms</option>
-        <option>PC</option>
-        <option>PS5</option>
-        <option>Switch</option>
+      <select id="platformFilter">
+        <option value="">Toutes les plateformes</option>
+        <option value="PlayStation">PlayStation</option>
+        <option value="Xbox">Xbox</option>
+        <option value="PC">PC</option>
+        <option value="Phone">Phone</option>
+        <!-- Ajoute d'autres plateformes si besoin -->
       </select>
-      <select>
-        <option>All Years</option>
-        <option>2024</option>
-        <option>2023</option>
-        <option>2022</option>
+      <select id="genreFilter">
+        <option value="">Tous les genres</option>
+        <option value="Action">Action</option>
+        <option value="Aventure">Aventure</option>
+        <option value="RPG">RPG</option>
+        <option value="Stratégie">Stratégie</option>
+        <option value="Sport">Sport</option>
+        <!-- Ajoute d'autres genres si besoin -->
       </select>
       <button id="searchBtn" class="search-btn">Search</button>
     </div>
@@ -71,5 +78,16 @@
   <footer class="footer">
     <p>&copy; 2025 GameRack. Tous droits réservés. <a href="#">Mentions légales</a></p>
   </footer>
-
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('platformFilter').addEventListener('change', function() {
+    const query = document.getElementById('searchBar').value.trim();
+    searchGames(query);
+  });
+  document.getElementById('genreFilter').addEventListener('change', function() {
+    const query = document.getElementById('searchBar').value.trim();
+    searchGames(query);
+  });
+});
+</script>
 </html>
