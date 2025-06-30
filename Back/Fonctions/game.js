@@ -189,6 +189,28 @@ class Games {
 
     }
 
+    static async getAllReview(){
+        try {
+            const games = await Game.findAll();
+            const reviewNotNull = []
+            let nullCount = 0
+            games.forEach(game => {
+                if(game.review !== null){
+                    reviewNotNull.push(game.review);
+                }else{
+                    nullCount ++
+                }
+            });
+
+            return {
+            reviews: reviewNotNull,
+            nullCount: nullCount
+        };
+        } catch (error) {
+            throw new Error('Failed to fetch reviews');
+        }
+    }
+
     // ADD
     static async addFinishGame({name, image, rating, platform, review, token, status= "finish"}) {
         try {

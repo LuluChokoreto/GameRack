@@ -92,6 +92,15 @@ router.get('/userGame', async (req, res)=> {
    }
 })
 
+router.get('/review', async (req, res) => {
+   try {
+      res.json(await Games.getAllReview())
+   } catch (error) {
+      res.status(400).json({erreur: error.message})
+
+   }
+})
+
 //route Post
 router.post('/add', async (req, res) => {
   try {
