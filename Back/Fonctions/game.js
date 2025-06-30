@@ -36,7 +36,7 @@ class Games {
     static async searchGames(query=null, platform = null, release_date = null) {
         try {
             let url = `${process.env.APIURL}?key=${process.env.APIKEY}`;
-            if (query) url += `&search=${encodeURIComponent(query)}`;
+            if (query) url += `&search=${encodeURIComponent(query)}&search_precise=true`;
             if (platform) url += `&platforms=${encodeURIComponent(platform)}`;
             if (release_date){
                 const date = `${release_date}-01-01,${release_date}-12-31`;
