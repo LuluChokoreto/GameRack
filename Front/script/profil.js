@@ -24,6 +24,7 @@ async function fetchUserGames() {
             method: 'GET',
         });
         userGames = await response.json();
+        console.log(userGames);
         renderGames('todo');
     } catch (error) {
         console.error('Erreur lors de la récupération des jeux de l\'utilisateur:', error);
@@ -72,9 +73,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (userpageLink) userpageLink.style.display = 'none';
     }
     fetchUserGames();
-    // Gestion des tabs
+
     const tabBtns = document.querySelectorAll('.tab-btn');
     tabBtns[0].addEventListener('click', () => renderGames('wish'));
     tabBtns[1].addEventListener('click', () => renderGames('todo'));
     tabBtns[2].addEventListener('click', () => renderGames('finish'));
+
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('token');
+            window.location.href = 'main.html';
+        });
+    }
 })
