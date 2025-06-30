@@ -71,7 +71,7 @@ async function login() {
             localStorage.setItem('token', result.token);
             localStorage.setItem('name', result.user);
             alert('Connexion réussie !');
-            window.location.href = 'main.html';
+            window.location.href = 'index.html';
         } else {
             alert('Erreur : ' + result.erreur );
         }
