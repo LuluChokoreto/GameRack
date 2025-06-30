@@ -70,8 +70,6 @@ router.get('/platform', async (req, res) => {
    }
 })
 
-
-
 //route Get Your Api
 router.get('/devGame', async (req, res) => {
    try {
@@ -94,7 +92,7 @@ router.get('/userGame', async (req, res)=> {
 
 router.get('/review', async (req, res) => {
    try {
-      res.json(await Games.getAllReview())
+      res.json(await Games.getAllReview(req.query.name));
    } catch (error) {
       res.status(400).json({erreur: error.message})
 
@@ -127,7 +125,7 @@ router.post('/addGame', async (req, res) => {
     const { name, image, rating, platform, review, token } = req.body;
     const decodedToken = jwt.verify(token, process.env.JWTSECRET);
     const game = await Games.addFinishGame({ name, image, rating, platform, review, token:decodedToken.code });
-    res.json(game);
+    res.json({succes: true, data: game});
   } catch (error) {
     res.status(400).json({ erreur: error.message });
   }
@@ -137,8 +135,8 @@ router.post('/addWish', async (req, res) => {
    try {
       const { name, image, token } = req.body;
       const decodedToken = jwt.verify(token, process.env.JWTSECRET);
-      const wish = await Games.addWish({ name, image, rating,  token: decodedToken.code });
-      res.json(wish);
+      const wish = await Games.addWish({ name, image,  token: decodedToken.code });
+      res.json({succes: true, data: wish});
    } catch (error) {
       res.status(400).json({ erreur: error.message });
    }
@@ -149,7 +147,7 @@ router.post('/addTodo', async (req, res) => {
       const { name, image, platform, token } = req.body;
       const decodedToken = jwt.verify(token, process.env.JWTSECRET);
       const todo = await Games.addTodo({ name, image, platform, token: decodedToken.code });
-      res.json(todo);
+      res.json({succes: true, data:todo});
    } catch (error) {
       res.status(400).json({ erreur: error.message });
       
@@ -171,7 +169,7 @@ router.post('/deleteWish', async (req, res) => {
    try {
       const { name, token } = req.body;
       const decodedToken = jwt.verify(token, process.env.JWTSECRET);
-      const wish = await Wishes.deleteWish(name, decodedToken.code);
+      const wish = await Games.deleteWish(name, decodedToken.code);
       res.json(wish);
    } catch (error) {
       res.status(400).json({ erreur: error.message });
@@ -182,7 +180,7 @@ router.post('/deleteTodo', async (req, res) => {
    try {
       const { name, token } = req.body;
       const decodedToken = jwt.verify(token, process.env.JWTSECRET);
-      const todo = await Todos.deleteTodo(name, decodedToken.code);
+      const todo = await Games.deleteTodo(name, decodedToken.code);
       res.json(todo);
    } catch (error) {
       res.status(400).json({ erreur: error.message });

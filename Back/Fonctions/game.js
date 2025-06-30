@@ -192,6 +192,28 @@ class Games {
 
     }
 
+    static async getAllReview(name){
+        try {
+            const games = await Game.findAll({
+                where: {
+                    name: name,
+                }
+            });
+            const reviewNotNull = []
+=            games.forEach(game => {
+                if(game.review !== null){
+                    reviewNotNull.push({review:game.review, rating:game.rating});
+                }
+            });
+
+            return {
+            reviews: reviewNotNull,
+        };
+        } catch (error) {
+            throw new Error('Failed to fetch reviews');
+        }
+    }
+
     // ADD
     static async addFinishGame({name, image, rating, platform, review, token, status= "finish"}) {
         try {
@@ -241,22 +263,21 @@ class Games {
     }
 
     // UPDATE
-    static async updateStatus(name, rating=null, platform=null, review=null, token) {
+    static async updateStatus({ name, status, rating, platform, review, token }) {
         try {
-            if( rating && review && platform){
-               return await Game.update(
-                    { status: "finish", rating: rating, platform: platform, review: review },
-                    { where: { name: name, code: token } }
+            if (status === "finish" && rating && review && platform) {
+                return await Game.update(
+                    { status: "finish", rating, platform, review },
+                    { where: { name, code: token } }
                 );
-            }else if(platform){
-               return await Game.update(
-                    { status: "todo" ,platform: platform },
-                    { where: { name: name, code: token } }
+            } else if (status === "todo" && platform) {
+                return await Game.update(
+                    { status: "todo", platform },
+                    { where: { name, code: token } }
                 );
-            }else{
+            } else {
                 throw new Error('Invalid parameters for game status update');
             }
-
         } catch (error) {
             throw new Error('Failed to update game status');
         }
