@@ -206,7 +206,7 @@ router.put('/updateStatus', async (req,res)=> {
    }
 })
 
-router.put('updateRole', async (req, res) => {
+router.put('/updateRole', async (req, res) => {
    try {
       const { email, role } = req.body;
       const user = await Users.updateRole(email);
