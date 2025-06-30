@@ -206,9 +206,16 @@ router.post('/deleteReview', async (req, res) => {
 //router Update
 router.put('/updateStatus', async (req,res)=> {
    try {
-      const { name, status, token } = req.body;
+      const { name, status, rating, platform, review, token } = req.body;
       const decodedToken = jwt.verify(token, process.env.JWTSECRET);
-      const game = await Games.updateStatus(name, status, decodedToken.code);
+      const game = await Games.updateStatus({
+         name,
+         status,
+         rating,
+         platform,
+         review,
+         token: decodedToken.code
+      });
       res.json(game);
    } catch (error) {
       res.status(400).json({ erreur: error.message });
