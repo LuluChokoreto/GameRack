@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="main.css" />
 
   <link rel="stylesheet" href="global.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
   
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -24,12 +26,12 @@
 
 
   <nav class="gl-nav">
-    <a href="login.html">Log In</a>
-    <a href="register.html">Register</a>
-    <a href="Games.html">Games</a>
-    <button id="toggle-mode" class="mode-btn">Light Mode</button>
-  </nav>
-
+      <a href="login.html" id="login-link">Log In</a>
+      <a href="register.html" id="register-link">Register</a>
+      <a href="Games.html">Games</a>
+      <a href="userpage.html" id="userpage-link" style="display:none;">My Rack</a>
+      <button id="toggle-mode" class="mode-btn">Light Mode</button>
+    </nav>
 </header>
 
 
@@ -78,7 +80,7 @@
     <ul></ul>
   </div>
 
-  <div class="gl-list-column">
+  <sect class="gl-list-column dev-games">
     <h4>Dev's favorite</h4>
     <ul></ul>
   </div>

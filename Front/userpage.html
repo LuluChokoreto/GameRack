@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +6,7 @@
   <title>User Profile - GameRack</title>
   <link rel="stylesheet" href="global.css">
   <link rel="stylesheet" href="userpage.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 </head>
 <body>
@@ -18,10 +18,13 @@
         
       </div>
       <nav class="gl-nav">
-        <a href="#"><i class="bi bi-person-circle"></i> My Library</a>
-        <a href="login.html">Log In</a>
-        <a href="register.html">Register</a>
+        <a href="#"><i class="bi bi-person-circle"></i> My Rack</a>
+        <a href="login.html" id="login-link">Log In</a>
+        <a href="register.html" id="register-link">Register</a>
         <a href="Games.html">Games</a>
+        <button id="logout-btn" class="logout-btn" title="Logout" style="background:none;border:none;color:#fff;cursor:pointer;font-size:1.1em;padding:0 8px;">
+            <i class="bi bi-box-arrow-right"></i> Logout
+        </button>
         <button id="toggle-mode" class="mode-btn">Light Mode</button>
      </nav>
     </header>
@@ -32,78 +35,28 @@
     </header>
 
     <div class="tab-buttons">
-      <button class="tab-btn active">Wishlist</button>
+      <button class="tab-btn">Wishlist</button>
       <button class="tab-btn">Currently Playing</button>
       <button class="tab-btn">Completed</button>
     </div>
 
     <section class="user-game-section" id="wishlist">
       <h2>Wishlist</h2>
-      <div class="game-card-list">
-        <div class="game-card">
-          <img src="image/finalfanstasy.jpg" alt="Game Cover" />
-          <h3>Elden Ring</h3>
-          <p>Platform: PC</p>
-          
-        </div>
-        <div class="game-card">
-          <img src="image/finalfanstasy.jpg" alt="Game Cover" />
-          <h3>Starfield</h3>
-          <p>Platform: PC</p>
-        </div>
-        <div class="game-card">
-          <img src="image/finalfanstasy.jpg" alt="Game Cover" />
-          <h3>Final Fantasy XVI</h3>
-          <p>Platform: PS5</p>
-        </div>
-      </div>
+      <div class="game-card-list"></div>
     </section>
 
     <section class="user-game-section hidden" id="playing">
       <h2>Currently Playing</h2>
-      <div class="game-card-list">
-        <div class="game-card">
-          <img src="image/finalfanstasy.jpg" alt="Game Cover" />
-          <h3>God of War Ragnarok</h3>
-          <p>Platform: PS5</p>
-        </div>
-        <div class="game-card">
-          <img src="image/finalfanstasy.jpg" alt="Game Cover" />
-          <h3>Hades</h3>
-          <p>Platform: PC, Switch</p>
-        </div>
-      </div>
+      <div class="game-card-list"></div>
     </section>
 
+      
     <section class="user-game-section hidden" id="completed">
-      <h2>Completed Games</h2>
-      <div class="game-card-list">
-        <div class="game-card">
-          <img src="image/finalfanstasy.jpg" alt="Game Cover" />
-          <h3>The Last of Us Part II</h3>
-          <p>Platform: PS5</p>
-        </div>
-        <div class="game-card">
-          <img src="image/finalfanstasy.jpg" alt="Game Cover" />
-          <h3>Spider-Man: Miles Morales</h3>
-          <p>Platform: PS5</p>
-        </div>
-        <div class="game-card">
-          <img src="image/finalfanstasy.jpg" alt="Game Cover" />
-          <h3>Horizon Zero Dawn</h3>
-          <p>Platform: PC</p>
-        </div>
-      </div>
+        <h2>Completed Games</h2>
+        <div class="game-card-list"></div>
+
     </section>
   </div>
-
-
-  <div class="game-card">
-  <button class="remove-btn">&times;</button>
-  <img src="image/finalfanstasy.jpg" alt="Game Cover" />
-  <h3>Elden Ring</h3>
-  <p>Platform: PC</p>
-</div>
 
 
 <footer class="gl-footer">
@@ -119,8 +72,7 @@
     <img src="https://cdn-icons-png.flaticon.com/512/733/733609.png" alt="GitHub">
   </div>
 </footer>
-
-<script src="script.js"></script>
+<script src="./script/profil.js"></script>
 
 </body>
 </html>

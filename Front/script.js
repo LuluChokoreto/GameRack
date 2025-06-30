@@ -2,7 +2,6 @@ async function fetchGames(page = 1) {
   try {
     const response = await fetch(`http://localhost:3000/game?page=${page}`);
     const data = await response.json();
-    console.log('Réponse API :', data);
 
     const games = Array.isArray(data) ? data : data.games;
 
@@ -37,8 +36,6 @@ async function fetchGames(page = 1) {
     console.error('Erreur lors du chargement des jeux :', err);
   }
 }
-
-
 
 function setupPagination() {
   const prevBtn = document.getElementById('prevBtn');
@@ -89,10 +86,22 @@ function normalizePlatforms(rawPlatforms) {
     return [...simplified];
 }
 
-
 let currentPage = 1;
 
 document.addEventListener('DOMContentLoaded', () => {
+  const loginLink = document.getElementById('login-link');
+  const registerLink = document.getElementById('register-link');
+  const userpageLink = document.getElementById('userpage-link');
+  const token = localStorage.getItem('token');
+  if (token) {
+    if (loginLink) loginLink.style.display = 'none';
+    if (registerLink) registerLink.style.display = 'none';
+    if (userpageLink) userpageLink.style.display = '';
+  } else {
+    if (loginLink) loginLink.style.display = '';
+    if (registerLink) registerLink.style.display = '';
+    if (userpageLink) userpageLink.style.display = 'none';
+  }
   fetchGames(currentPage);
   setupPagination();
 });
@@ -138,10 +147,8 @@ async function fetchBestGames() {
   try {
     const response = await fetch('http://localhost:3000/best');
     const games = await response.json();
-    console.log('Réponse API best games:', games);
 
     const listContainer = document.querySelector('.best-games ul');
-    console.log('Sélecteur best-games trouvé ?', listContainer);
 
     if (!listContainer) {
       console.error('Impossible de trouver .best-games ul dans le DOM');
@@ -164,7 +171,7 @@ async function fetchBestGames() {
 
       const dateSpan = document.createElement('span');
       dateSpan.className = 'date';
-      dateSpan.textContent = game.release_date || 'N/A';
+      dateSpan.textContent = game.realese_date || 'N/A';
 
       const metaSpan = document.createElement('span');
       metaSpan.className = 'rating';
@@ -181,6 +188,55 @@ async function fetchBestGames() {
     });
   } catch (error) {
     console.error('Erreur lors du chargement des meilleurs jeux:', error);
+  }
+}
+
+async function fetchDevGames() {
+  try {
+    const response = await fetch('http://localhost:3000/devGame');
+    const games = await response.json();
+
+    const listContainer = document.querySelector('.dev-games ul');
+
+    if (!listContainer) {
+      console.error('Impossible de trouver .best-games ul dans le DOM');
+      return;
+    }
+
+    listContainer.innerHTML = '';
+
+    games.slice(0, 6).forEach(game => {
+      const li = document.createElement('li');
+
+      const img = document.createElement('img');
+      img.src = game.img || generatePlaceholder(game.gameName);
+      img.alt = game.gameName || 'Game image';
+
+      const span = document.createElement('span');
+
+      const titleSpan = document.createElement('span');
+      titleSpan.className = 'title';
+      titleSpan.textContent = game.gameName;
+
+      const devSpan = document.createElement('span');
+      devSpan.className = 'developer';
+      devSpan.textContent = `Developer: ${game.devName}`;
+
+      const dateSpan = document.createElement('span');
+      dateSpan.className = 'date';
+      dateSpan.textContent = game.realese_date || 'N/A';
+
+      span.appendChild(titleSpan);
+      span.appendChild(devSpan);
+      span.appendChild(dateSpan);
+
+      li.appendChild(img);
+      li.appendChild(span);
+
+      listContainer.appendChild(li);
+    });
+  } catch (error) {
+    console.error('Erreur lors du chargement des jeux développeur:', error);
   }
 }
 
@@ -208,7 +264,6 @@ async function fetchRandomGames() {
   try {
     const response = await fetch('http://localhost:3000/random');
     const games = await response.json();
-    console.log('Réponse API random:', games);
 
     const trendingList = document.querySelector('.trending-list');
     if (!trendingList) {
@@ -265,7 +320,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-  fetchComingSoon();
+  const loginLink = document.getElementById('login-link');
+  const registerLink = document.getElementById('register-link');
+  const userpageLink = document.getElementById('userpage-link');
+  const token = localStorage.getItem('token');
+  if (token) {
+    if (loginLink) loginLink.style.display = 'none';
+    if (registerLink) registerLink.style.display = 'none';
+    if (userpageLink) userpageLink.style.display = '';
+  } else {
+    if (loginLink) loginLink.style.display = '';
+    if (registerLink) registerLink.style.display = '';
+    if (userpageLink) userpageLink.style.display = 'none';
+  }
+  fetchComingSoon(); 
   fetchBestGames();
   fetchRandomGames();
+  fetchDevGames();
 });
