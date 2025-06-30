@@ -33,9 +33,13 @@ class Games {
         }
     }
 
-    static async searchGames(query) {
+    static async searchGames(query=null, platform = null, release_date = null) {
         try {
-            const data = await axios.get(`${process.env.APIURL}?key=${process.env.APIKEY}&search=${query}`);
+            let url = `${process.env.APIURL}?key=${process.env.APIKEY}`;
+            if (query) url += `&search=${encodeURIComponent(query)}`;
+            if (platform) url += `&platforms=${encodeURIComponent(platform)}`;
+            if (release_date) url += `&dates=${encodeURIComponent(release_date)}`;
+            const data = await axios.get(url);
             const gamesData = data.data.results;
             const games = Array.isArray(gamesData)
                 ? gamesData.map(game => ({
@@ -111,6 +115,7 @@ class Games {
                 name: game.name,
                 image: game.background_image || null,
                 metacritic: game.metacritic || null,
+                release_date: game.released || null,
             }))
             : [];
             return games;
@@ -146,7 +151,7 @@ class Games {
         }
     }
 
-    /**  static async getAllPlatforms(){
+    static async getAllPlatforms(){
         try {
             const url = process.env.APIURL.replace(/game(s)?/i, 'platforms');
             const [page1, page2] = await Promise.all([
@@ -166,7 +171,7 @@ class Games {
         }
     }
 
-    static async filterGames({idPlatforms =null, date= null}) {
+    /**static async filterGames({idPlatforms =null, date= null}) {
         try {
             let url = `${process.env.APIURL}?key=${process.env.APIKEY}`;
             if(idPlatforms){

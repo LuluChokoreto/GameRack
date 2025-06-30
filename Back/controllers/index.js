@@ -19,7 +19,10 @@ router.get('/game', async (req, res) => {
 
 router.get('/search', async (req, res) => {
    try{
-      res.json(await Games.searchGames(req.query.game));
+      const name = req.query.game ?? null;
+      const platform = req.query.platform ?? null;
+      const date = req.query.date ?? null;
+      res.json(await Games.searchGames(name, platform, date));
    } catch (error) {
       res.status(400).json({ erreur: error.message });
    }
@@ -59,22 +62,13 @@ router.get('/comingSoon', async (req, res) => {
    }
 })
 
-// a finir peux être combiner avec la route search
-// router.get('/filter', async (req, res) => {
-//    try {
-//       const {platform, date}=req.query;
-//       res.json(await Games.filterGames(platform, date));
-//    } catch (error) {
-//       res.status(400).json({ erreur: error.message });
-//    }
-// })
-// router.get('/platform', async (req, res) => {
-//    try {
-//       res.json(await Games.getAllPlatforms());
-//    } catch (error) {
-//       res.status(400).json({ erreur: error.message });
-//    }
-// })
+router.get('/platform', async (req, res) => {
+   try {
+      res.json(await Games.getAllPlatforms());
+   } catch (error) {
+      res.status(400).json({ erreur: error.message });
+   }
+})
 
 
 
@@ -113,7 +107,7 @@ router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
     const { user, token } = await Users.loginUser({ email, password });
-    res.json(token);
+    res.json(user,token);
   } catch (error) {
     res.status(400).json({ erreur: error.message });
    }

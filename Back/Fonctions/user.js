@@ -39,7 +39,8 @@ class Users{
       throw new Error('Invalid password');
     }
     const token = jwt.sign({ id: user.id, code: user.code, role: user.role }, process.env.JWTSECRET);
-    return { user, token };
+    const name = user.name;
+    return { name, token };
   } catch (error) {
     throw new Error('Failed to login user');
   }
