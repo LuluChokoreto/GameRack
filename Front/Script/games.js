@@ -28,7 +28,7 @@ async function fetchGames(page = 1) {
             ${normalizePlatforms(game.platforms).map(p => `<span class="platform">${p}</span>`).join('')}
           </div>
           <h3>${game.name}</h3>
-          <p><strong>Release date :</strong> ${game.release_date ? new Date(game.release_date).toLocaleDateString('fr-FR') : 'Inconnue'}</p>
+          <p><strong>Release date :</strong> ${game.release_date ? game.release_date : 'Inconnue'}</p>
           <p><strong>Metacritic score:</strong> ${game.metacritic}</p>
         </div>
       `;

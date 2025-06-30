@@ -529,3 +529,14 @@ body {
   border-bottom: 1px solid #111;
 }
 }
+
+.coming-soon a,
+.best-games a {
+  color: white;
+  text-decoration: none; /* Enlève le soulignement si tu veux */
+}
+
+.coming-soon a:hover,
+.best-games a:hover {
+  text-decoration: underline; /* Optionnel, effet au survol */
+}

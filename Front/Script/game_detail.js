@@ -33,7 +33,7 @@ async function fetchGameDetail() {
         </div>
         <p><strong>Publisher(s) :</strong> ${game.publishers || 'Inconnu'}</p>
         <p><strong>Developer(s) :</strong> ${game.developers ? game.developers.join(', ') : 'Inconnu'}</p>
-        <p><strong>Release date :</strong> ${game.release_date ? new Date(game.release_date).toLocaleDateString('fr-FR') : 'Inconnue'}</p>
+        <p><strong>Release date :</strong> ${game.release_date ? game.release_date : 'Inconnue'}</p>
         <p><strong>Metacritic score:</strong> ${game.metacritic}</p>
         <p class="game-description">${game.description || 'Aucune description disponible.'}</p>
         <div class="game-actions">

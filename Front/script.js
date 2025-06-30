@@ -113,6 +113,11 @@ async function fetchComingSoon() {
     const games = await response.json();
 
     const listContainer = document.querySelector('.coming-soon ul');
+    if (!listContainer) {
+      console.error('Impossible de trouver .coming-soon ul dans le DOM');
+      return;
+    }
+
     listContainer.innerHTML = '';
 
     games.slice(0, 7).forEach(game => {
@@ -125,7 +130,12 @@ async function fetchComingSoon() {
       const span = document.createElement('span');
       const titleSpan = document.createElement('span');
       titleSpan.className = 'title';
-      titleSpan.textContent = game.name;
+
+      // Ajout du lien autour du nom
+      const titleLink = document.createElement('a');
+      titleLink.href = `game_card.html?id=${encodeURIComponent(game.id)}`;
+      titleLink.textContent = game.name;
+      titleSpan.appendChild(titleLink);
 
       const dateSpan = document.createElement('span');
       dateSpan.className = 'date';
@@ -142,6 +152,7 @@ async function fetchComingSoon() {
     console.error('Erreur lors du chargement des Coming Soon:', error);
   }
 }
+
 
 async function fetchBestGames() {
   try {
@@ -165,13 +176,19 @@ async function fetchBestGames() {
       img.alt = game.name || 'Game image';
 
       const span = document.createElement('span');
+
       const titleSpan = document.createElement('span');
       titleSpan.className = 'title';
-      titleSpan.textContent = game.name;
+
+      // Ajout du lien autour du nom
+      const titleLink = document.createElement('a');
+      titleLink.href = `game_card.html?id=${encodeURIComponent(game.id)}`;
+      titleLink.textContent = game.name;
+      titleSpan.appendChild(titleLink);
 
       const dateSpan = document.createElement('span');
       dateSpan.className = 'date';
-      dateSpan.textContent = game.realese_date || 'N/A';
+      dateSpan.textContent = game.release_date || 'N/A'; // correction de realese_date
 
       const metaSpan = document.createElement('span');
       metaSpan.className = 'rating';
@@ -190,6 +207,8 @@ async function fetchBestGames() {
     console.error('Erreur lors du chargement des meilleurs jeux:', error);
   }
 }
+
+
 
 async function fetchDevGames() {
   try {
@@ -274,8 +293,9 @@ async function fetchRandomGames() {
     trendingList.innerHTML = '';
 
     games.slice(0, 6).forEach(game => {
-      const card = document.createElement('div');
-      card.className = 'game-card';
+      const cardLink = document.createElement('a');
+      cardLink.href = `game_card.html?id=${encodeURIComponent(game.id)}`;
+      cardLink.className = 'game-card';
 
       const img = document.createElement('img');
       img.src = game.image || generatePlaceholder(game.name);
@@ -285,15 +305,16 @@ async function fetchRandomGames() {
       title.className = 'game-title';
       title.textContent = game.name;
 
-      card.appendChild(img);
-      card.appendChild(title);
+      cardLink.appendChild(img);
+      cardLink.appendChild(title);
 
-      trendingList.appendChild(card);
+      trendingList.appendChild(cardLink);
     });
   } catch (error) {
     console.error('Erreur lors du chargement des jeux random:', error);
   }
 }
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const toggleBtn = document.getElementById('toggle-mode');
