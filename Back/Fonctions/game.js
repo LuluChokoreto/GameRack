@@ -189,22 +189,22 @@ class Games {
 
     }
 
-    static async getAllReview(){
+    static async getAllReview(name){
         try {
-            const games = await Game.findAll();
+            const games = await Game.findAll({
+                where: {
+                    name: name,
+                }
+            });
             const reviewNotNull = []
-            let nullCount = 0
-            games.forEach(game => {
+=            games.forEach(game => {
                 if(game.review !== null){
-                    reviewNotNull.push(game.review);
-                }else{
-                    nullCount ++
+                    reviewNotNull.push({review:game.review, rating:game.rating});
                 }
             });
 
             return {
             reviews: reviewNotNull,
-            nullCount: nullCount
         };
         } catch (error) {
             throw new Error('Failed to fetch reviews');
