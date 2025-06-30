@@ -10,14 +10,13 @@
 </head>
 <body>
 
-  <header class="navbar">
-    <div class="logo-area">
-      <img src="image/gamerack_logo.png" alt="GameRack Logo" class="logo-img" />
+  <header class="gl-header">
+    <div class="gl-logo">
+      <a href="main.html"><img src="image/gamerack_logo.png" alt="Gamerack Logo"></a>
     </div>
-    <nav>
-      <a href="#"><i class="bi bi-person-circle"></i> My Library</a>
-      <a href="#">Log in</a>
-      <a href="#">Register</a>
+    <nav class="gl-nav">
+      <a href="login.html">Log In</a>
+      <a href="register.html">Register</a>
       <a href="Games.html">Games</a>
       <button id="toggle-mode" class="mode-btn">Light Mode</button>
     </nav>
@@ -47,20 +46,6 @@
     <p>&copy; 2025 GameRack. Tous droits réservés. <a href="#">Mentions légales</a></p>
   </footer>
 
-  <script>
-    // Simuler un appel à un backend
-    async function addToCollection() {
-      const res = await fetch('/api/games/zelda-botw/add', { method: 'POST' });
-      alert('Jeu ajouté à votre collection (simulation)');
-    }
-
-    function rateGame() {
-      alert('Fonction de notation à venir...');
-    }
-
-    function commentGame() {
-      alert('Fonction de commentaire à venir...');
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>

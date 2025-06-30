@@ -1,3 +1,13 @@
+/* Remove all unwanted border from html and body globally */
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background-clip: border-box !important;
+  box-sizing: border-box;
+}
 .gl-list-column {
   background-color: #1a1a1a;
   color: #f0f0f0;
@@ -39,8 +49,8 @@ body.light-mode .gl-header,
 body.light-mode .gl-footer,
 body.light-mode .navbar,
 body.light-mode footer {
-  background-color: #ffffff;
-  border-color: #ddd;
+  background-color: #f5f5f5;
+  border-color: #e0e0e0;
 }
 
 body.light-mode .gl-nav a,
@@ -72,7 +82,56 @@ body.light-mode .tab-btn:hover {
   color: #111;
 }
 
+.gl-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #181818;
+  border-bottom: 1px solid #121212;
+  flex-wrap: wrap;
+}
+
+.gl-logo img {
+  height: 40px;
+}
+
+.gl-nav {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.gl-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+}
+
+.gl-nav a:hover {
+  color: #f1c40f;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+body.light-mode .gl-header {
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+body.light-mode .gl-nav a {
+  color: #111;
+}
+
+body.light-mode .gl-nav a:hover {
+  color: #f1c40f;
+  background-color: rgba(0,0,0,0.04);
+}
+
 .gl-footer {
+  border-top: 1px solid #1a1a1a;
   background-color: #1a1a1a;
   color: #ccc;
   display: flex;
@@ -82,6 +141,11 @@ body.light-mode .tab-btn:hover {
   flex-wrap: wrap;
   margin-top: auto;
   width: 100%;
+}
+
+body.light-mode .gl-footer {
+  border-top: 1px solid #f5f5f5;
+  background-color: #f5f5f5;
 }
 
 .gl-footer .left-links a {

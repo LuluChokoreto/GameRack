@@ -7,7 +7,7 @@
   --gl-shadow: rgba(0, 0, 0, 0.3);
 }
 
-body {
+html, body {
   margin: 0;
   background-color: #121212;
   color: var(--gl-fg);
@@ -16,6 +16,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
 .gl-header {
@@ -112,8 +113,9 @@ body {
 }
 
 body.light-mode .gl-list-column {
-  background-color: #ffffff;
+  background-color: #f5f5f5;
   color: #111;
+  border: 1px solid #e0e0e0;
 }
 
 .gl-list-column {

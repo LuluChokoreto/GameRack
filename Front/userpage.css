@@ -1,5 +1,3 @@
-
-
 html, body {
   height: 100%;
   margin: 0;
@@ -125,6 +123,11 @@ body {
   background-color: #181818;
   border-bottom: 1px solid #333;
   flex-wrap: wrap;
+  width: 100vw;
+  box-sizing: border-box;
+  left: 0;
+  right: 0;
+  position: relative;
 }
 
 .gl-logo img {
@@ -149,6 +152,21 @@ body {
 .gl-nav a:hover {
   color: #f1c40f;
   background-color: rgba(255, 255, 255, 0.05);
+}
+
+.gl-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #181818;
+  border-top: 1px solid #333;
+  flex-wrap: wrap;
+  width: 100vw;
+  box-sizing: border-box;
+  left: 0;
+  right: 0;
+  position: relative;
 }
 
 

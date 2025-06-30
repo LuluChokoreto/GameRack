@@ -1,12 +1,54 @@
-body {
-  background-color: #121212;
-  font-family: 'Inter', sans-serif;
-  color: #fff;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  min-height: 100vh;
+/* Light mode global pour login/register */
+body.light-mode {
+  background-color: #fff;
+  color: #111;
 }
+
+/* Partie gauche (présentation) */
+body.light-mode .login-left {
+  background-color: #ffffff;
+  color: #111;
+}
+
+body.light-mode .login-left p {
+  color: #555;
+}
+
+/* Partie formulaire */
+body.light-mode .login-form {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  color: #111;
+}
+
+body.light-mode .login-form input {
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  color: #111;
+}
+
+body.light-mode .login-form p {
+  color: #666;
+}
+
+body.light-mode .login-form button[type="submit"] {
+  background-color: #f5f5f5;
+  color: #111;
+}
+
+body.light-mode .login-form button[type="submit"]:hover {
+  background-color: #f1c40f;
+  color: #111;
+}
+
+body.light-mode .signup-link {
+  color: #555;
+}
+
+body.light-mode .signup-link a {
+  color: #f1c40f;
+}
+
 
 .login-container {
   display: flex;
@@ -33,6 +75,26 @@ body {
 .login-right {
   align-items: center;
   border-right: 1px solid #000;
+  background-color: #1a1a1a; /* dark gray for default mode */
+  transition: background-color 0.3s;
+}
+
+body.light-mode .login-right {
+  background-color: #fff;
+  border-right: 1px solid #e0e0e0;
+}
+
+@media (max-width: 900px) {
+  .login-right {
+    border-right: none !important;
+  }
+  body.light-mode .login-right {
+    border-right: none !important;
+  }
+}
+
+body.light-mode .login-right {
+  background-color: #fff;
 }
 
 .logo-img {
@@ -63,15 +125,19 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
 }
 
+
 .color-box {
   background-color: #fff;
   border-radius: 8px;
   width: 100%;
-  /* limite la largeur à 140px pour éviter des boxes trop larges */
   max-width: 140px;
-  /* ratio ajusté pour garder une forme équilibrée */
   aspect-ratio: 4 / 3;
   position: relative;
+  transition: background-color 0.3s;
+}
+
+body.light-mode .color-box {
+  background-color: #e0e0e0;
 }
 
 .color-dot {
@@ -194,9 +260,28 @@ button[type="submit"]:hover {
 /* Responsive pour mobile/tablette */
 @media (max-width: 768px) {
   body {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
     flex-direction: column;
     align-items: center;
+    background: #000;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    min-height: 100vh;
+    box-sizing: border-box;
   }
+/* Remove unwanted white border for all screen sizes */
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background-clip: border-box !important;
+  box-sizing: border-box;
+}
 
   .login-container {
     flex-direction: column;
