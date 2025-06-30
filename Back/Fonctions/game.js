@@ -38,7 +38,10 @@ class Games {
             let url = `${process.env.APIURL}?key=${process.env.APIKEY}`;
             if (query) url += `&search=${encodeURIComponent(query)}`;
             if (platform) url += `&platforms=${encodeURIComponent(platform)}`;
-            if (release_date) url += `&dates=${encodeURIComponent(release_date)}`;
+            if (release_date){
+                const date = `${release_date}-01-01,${release_date}-12-31`;
+                url += `&dates=${encodeURIComponent(date)}`;
+            } 
             const data = await axios.get(url);
             const gamesData = data.data.results;
             const games = Array.isArray(gamesData)
