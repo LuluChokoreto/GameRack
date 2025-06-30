@@ -96,12 +96,12 @@ async function insertDefaultDevGames() {
   const count = await Dev_Games.count();
   if (count === 0) {
     await Dev_Games.bulkCreate([
-      { gameName: "Grand Theft Auto: San Andreas", devName: "Alfredo", img: "Grand Theft Auto: San Andreas.jpg", realese_date: "2015-05-19" },
-      { gameName: "Cyberpunk 2077", devName: "Alfredo", img: "cyberpunk2077.jpg", realese_date: "2020-12-10" },
-      { gameName: "Minecraft", devName: "Tristan", img: "Minecraft.jpg", realese_date: "2022-02-25" },
-      { gameName: "Terraria", devName: "Tristan", img: "Terraria.jpg", realese_date: "2018-04-20" },
-      { gameName: "Hollow Knight", devName: "Ryan", img: "hollowknight.jpg", realese_date: "2017-02-24" },
-      { gameName: "League of Legends", devName: "Ryan", img: "League of Legends.jpg", realese_date: "2009-10-27" },
+      { gameName: "Grand Theft Auto: San Andreas", devName: "Alfredo", img: "https://media.rawg.io/media/games/960/960b601d9541cec776c5fa42a00bf6c4.jpg", realese_date: "2015-05-19" },
+      { gameName: "Cyberpunk 2077", devName: "Alfredo", img: "https://media.rawg.io/media/games/26d/26d4437715bee60138dab4a7c8c59c92.jpg", realese_date: "2020-12-10" },
+      { gameName: "Minecraft", devName: "Tristan", img: "https://media.rawg.io/media/games/b4e/b4e4c73d5aa4ec66bbf75375c4847a2b.jpg", realese_date: "2022-02-25" },
+      { gameName: "Terraria", devName: "Tristan", img: "https://media.rawg.io/media/games/f46/f466571d536f2e3ea9e815ad17177501.jpg", realese_date: "2018-04-20" },
+      { gameName: "Hollow Knight", devName: "Ryan", img: "https://media.rawg.io/media/games/4cf/4cfc6b7f1850590a4634b08bfab308ab.jpg", realese_date: "2017-02-24" },
+      { gameName: "League of Legends", devName: "Ryan", img: "https://media.rawg.io/media/games/78b/78bc81e247fc7e77af700cbd632a9297.jp", realese_date: "2009-10-27" },
     ]);
     console.log("Données Dev_Games insérées !");
   }
