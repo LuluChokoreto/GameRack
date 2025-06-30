@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="global.css">
   <link rel="icon" href="data:,">
-  <script src="./Script/script.js"></script>
+  <script src="./Script/games.js"></script>
 </head>
 
 <body>
@@ -39,23 +39,8 @@
 
     <div class="search-bar">
       <input type="search" id="searchBar" placeholder="Search a game..." />
-      <select id="platformFilter">
-        <option value="">Toutes les plateformes</option>
-        <option value="PlayStation">PlayStation</option>
-        <option value="Xbox">Xbox</option>
-        <option value="PC">PC</option>
-        <option value="Phone">Phone</option>
-        <!-- Ajoute d'autres plateformes si besoin -->
-      </select>
-      <select id="genreFilter">
-        <option value="">Tous les genres</option>
-        <option value="Action">Action</option>
-        <option value="Aventure">Aventure</option>
-        <option value="RPG">RPG</option>
-        <option value="Stratégie">Stratégie</option>
-        <option value="Sport">Sport</option>
-        <!-- Ajoute d'autres genres si besoin -->
-      </select>
+      <select id="platformFilter" class="filter-dropdown"></select>
+      <select id="yearFilter" class="filter-dropdown"></select>
       <button id="searchBtn" class="search-btn">Search</button>
     </div>
 
@@ -69,14 +54,15 @@
   </section>
 
   <!-- Sidebar à droite -->
-  <aside class="sidebar">
-    <h3>🔥 Trending Games</h3>
-    <ul class="trending">
-      <li>1. Baldur's Gate 3</li>
-      <li>2. Spider-Man 2</li>
-      <li>3. Alan Wake 2</li>
-    </ul>
-  </aside>
+<aside class="sidebar">
+  <h3>🔥 Trending Games</h3>
+  <div class="trending-list">
+    <!-- Mini game cards injectées ici -->
+  </div>
+</aside>
+
+</aside>
+
 </main>
 
   <footer class="footer">

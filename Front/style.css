@@ -314,7 +314,6 @@ input, select {
 .pagination button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-<<<<<<< HEAD
 }
 
 .top-banner {
@@ -441,4 +440,45 @@ input, select {
   background-color: #FFD700;
   color: #000;
   border-color: #FFD700;
+}
+
+
+/* Mini game cards in sidebar */
+.trending-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mini-game-card {
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.mini-game-card:hover {
+  transform: scale(1.02);
+}
+
+.mini-game-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-bottom: 1px solid #333;
+}
+
+.mini-game-card a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  padding: 8px;
+}
+
+.mini-game-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

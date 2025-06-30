@@ -3,21 +3,13 @@
   --gl-fg: #ffffff;
   --gl-accent: #f1c40f;
   --gl-card-bg: #1e1e1e;
-<<<<<<< HEAD
-  --gl-border: #333;
-=======
   --gl-border: #121212;
->>>>>>> origin/Ryan
   --gl-shadow: rgba(0, 0, 0, 0.3);
 }
 
 body {
   margin: 0;
-<<<<<<< HEAD
-  background-color: #000;
-=======
   background-color: #121212;
->>>>>>> origin/Ryan
   color: var(--gl-fg);
   font-family: 'Inter', sans-serif;
   font-size: 16px;
@@ -175,7 +167,6 @@ body {
   color: #ccc;
 }
 
-<<<<<<< HEAD
 .gl-footer {
   background-color: #1a1a1a;
   color: #ccc;
@@ -245,7 +236,6 @@ body {
     max-height: 40px;
     width: auto;
   }
-<<<<<<< HEAD
 }
 
 .feature-section img {
@@ -253,8 +243,6 @@ body {
   height: auto;
   object-fit: contain;
 }
-
-=======
 
   .feature-image {
     width: 40%;
@@ -278,7 +266,6 @@ body {
     object-fit: cover;
     border-bottom: none;
   }
-}
 
 .intro-section {
   padding: 20px;
@@ -304,8 +291,6 @@ body {
   color: #ccc;
 }
 
-
->>>>>>> origin/Ryan
 .trending-section {
   padding: 20px;
 }
@@ -330,22 +315,12 @@ body {
   display: flex;
   gap: 20px;
   justify-content: flex-start;
-<<<<<<< HEAD
   align-items: flex-start;  /* ensure all cards start at the same top line */
   flex-wrap: wrap;          /* allow wrapping on narrow screens */
   overflow: visible;        /* no vertical scroll */
   padding-top: 10px;
 }
 
-
-=======
-  align-items: flex-start;
-  flex-wrap: wrap;
-  overflow: visible;
-  padding-top: 10px;
-}
-
->>>>>>> origin/Ryan
 .game-card {
   position: relative;
   background-color: #1f1f1f;
@@ -357,12 +332,8 @@ body {
   flex-direction: column;
   text-decoration: none;
   color: inherit;
-<<<<<<< HEAD
-  min-height: 320px;
-=======
   width: 100%;
   height: auto;
->>>>>>> origin/Ryan
 }
 
 .game-card:hover {
@@ -556,4 +527,5 @@ body {
   height: auto;
   object-fit: cover;
   border-bottom: 1px solid #111;
+}
 }
