@@ -17,18 +17,26 @@
 </div>
 
     <nav>
-
-      <a href="#"><i class="bi bi-person-circle"></i> My Rack</a>
-      <a href="login.html">Log in</a>
-      <a href="register.html">Register</a>
-      <a href="Games.html">Games</a>
-      <button id="toggle-mode" class="mode-btn">Light Mode</button>
+        <a href="userpage.html"><i class="bi bi-person-circle"></i> My Rack</a>
+        <a href="login.html" id="login-link">Log In</a>
+        <a href="register.html" id="register-link">Register</a>
+        <a href="Games.html">Games</a>
+        <button id="logout-btn" class="logout-btn" title="Logout" style="background:none;border:none;color:#fff;cursor:pointer;font-size:1.1em;padding:0 8px;">
+            <i class="bi bi-box-arrow-right"></i> Logout
+        </button>
+        <button id="toggle-mode" class="mode-btn">Light Mode</button>
     </nav>
   </header>
 
   <main class="game-detail" id="gameDetail">
     <!-- Contenu injecté dynamiquement ici -->
   </main>
+   <div class= "game-comment" id="commentsSection">
+  <h2>Commentaires</h2>
+  <div id="commentsList">Chargement des commentaires...</div>
+</div>
+
+ 
 
   <footer class="footer">
     <p>&copy; 2025 GameRack. Tous droits réservés. <a href="#">Mentions légales</a></p>

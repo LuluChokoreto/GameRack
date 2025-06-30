@@ -92,6 +92,15 @@ router.get('/userGame', async (req, res)=> {
    }
 })
 
+router.get('/review', async (req, res) => {
+   try {
+      res.json(await Games.getAllReview())
+   } catch (error) {
+      res.status(400).json({erreur: error.message})
+
+   }
+})
+
 //route Post
 router.post('/add', async (req, res) => {
   try {
@@ -106,8 +115,8 @@ router.post('/add', async (req, res) => {
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
-    const { user, token } = await Users.loginUser({ email, password });
-    res.json(user,token);
+    const { name, token } = await Users.loginUser({ email, password });
+    res.json({user:name,token});
   } catch (error) {
     res.status(400).json({ erreur: error.message });
    }
@@ -197,9 +206,16 @@ router.post('/deleteReview', async (req, res) => {
 //router Update
 router.put('/updateStatus', async (req,res)=> {
    try {
-      const { name, status, token } = req.body;
+      const { name, status, rating, platform, review, token } = req.body;
       const decodedToken = jwt.verify(token, process.env.JWTSECRET);
-      const game = await Games.updateStatus(name, status, decodedToken.code);
+      const game = await Games.updateStatus({
+         name,
+         status,
+         rating,
+         platform,
+         review,
+         token: decodedToken.code
+      });
       res.json(game);
    } catch (error) {
       res.status(400).json({ erreur: error.message });

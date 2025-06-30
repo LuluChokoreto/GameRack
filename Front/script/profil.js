@@ -50,9 +50,9 @@ function renderGames(status) {
         const card = document.createElement('div');
         card.className = 'game-card';
         card.innerHTML = `
-          <img src="${game.image}" alt="Game Cover" />
-          <h3>${game.name}</h3>
-          <p>Platform: ${game.platform || 'N/A'}</p>
+            <img src="${game.image}" alt="Game Cover" />
+            <h3>${game.name}</h3>
+            <p>Platform: ${game.platform || 'N/A'}</p>
         `;
         list.appendChild(card);
     });

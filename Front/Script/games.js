@@ -244,7 +244,19 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const searchInput = document.getElementById('searchBar');
   const searchBtn = document.getElementById('searchBtn');
-
+  const loginLink = document.getElementById('login-link');
+  const registerLink = document.getElementById('register-link');
+  const userpageLink = document.getElementById('userpage-link');
+  const token = localStorage.getItem('token');
+    if (token) {
+        if (loginLink) loginLink.style.display = 'none';
+        if (registerLink) registerLink.style.display = 'none';
+        if (userpageLink) userpageLink.style.display = '';
+    } else {
+        if (loginLink) loginLink.style.display = '';
+        if (registerLink) registerLink.style.display = '';
+        if (userpageLink) userpageLink.style.display = 'none';
+    }
   searchBtn.addEventListener('click', () => {
     const query = searchInput.value.trim();
     searchGames(query);
