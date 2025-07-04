@@ -200,7 +200,7 @@ class Games {
                 }
             });
             const reviewNotNull = []
-=            games.forEach(game => {
+            games.forEach(game => {
                 if(game.review !== null){
                     reviewNotNull.push({review:game.review, rating:game.rating});
                 }

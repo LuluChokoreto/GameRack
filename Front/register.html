@@ -11,20 +11,20 @@
 <body>
   <button id="toggle-mode" class="mode-btn-fixed">Light Mode</button>
 
->>>>>>> origin/Ryan
   <div class="login-container">
     
     <!-- Partie foncée à gauche (présentation) -->
     <div class="login-left">
       <div class="logo-wrapper">
-        <a href="index.html">
+        <a href="main.html">
           <img src="image/gamerack_logo.png" alt="GameRack Logo" class="logo-img" />
         </a>
       </div>
       <h2>Track Your Gaming Journey</h2>
       <p>
-      Join our community of passionate gamers on GameRack — a game tracking platform created by friends, for friends. Keep track of your collection, rate and review your favorite games, and discover new adventures to explore. Stay up to date with the latest releases and upcoming titles. Start your journey today and grow together with our close-knit group of dedicated players!
+       Join our community of passionate gamers on GameRack — a game tracking platform created by friends, for friends. Keep track of your collection, rate and review your favorite games, and discover new adventures to explore. Stay up to date with the latest releases and upcoming titles. Start your journey today and grow together with our close-knit group of dedicated players!
       </p>
+
       <div class="color-boxes">
         <div class="color-box"><div class="color-dot pink"></div></div>
         <div class="color-box"><div class="color-dot green"></div></div>
@@ -35,14 +35,16 @@
 
     <!-- Formulaire clair à droite -->
     <div class="login-right">
-      <form class="login-form">
+      <form class="login-form" id="signup-form">
         <h2>Create Account</h2>
         <p>Create your GameRack account to start tracking and rating your games</p>
 
-        <input type="text" placeholder="Username" required />
-        <input type="email" placeholder="Email address" required />
-        <input type="password" placeholder="Password" required />
+        <input type="text" name="name" placeholder="Username" required />
+        <input type="email" name="email" placeholder="Email address" required />
+        <input type="password" name="password" placeholder="Password" required />
         
+
+      
 
         <button type="submit">Register</button>
 
@@ -54,5 +56,5 @@
 
   </div>
 </body>
-<script src="script.js"></script>
+<script src="./script/signupLogin.js"></script>
 </html>

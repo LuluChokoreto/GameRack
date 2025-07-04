@@ -248,19 +248,33 @@ document.addEventListener('DOMContentLoaded', async () => {
   const registerLink = document.getElementById('register-link');
   const userpageLink = document.getElementById('userpage-link');
   const token = localStorage.getItem('token');
-    if (token) {
-        if (loginLink) loginLink.style.display = 'none';
-        if (registerLink) registerLink.style.display = 'none';
-        if (userpageLink) userpageLink.style.display = '';
-    } else {
-        if (loginLink) loginLink.style.display = '';
-        if (registerLink) registerLink.style.display = '';
-        if (userpageLink) userpageLink.style.display = 'none';
-    }
+  if (token) {
+    if (loginLink) loginLink.style.display = 'none';
+    if (registerLink) registerLink.style.display = 'none';
+    if (userpageLink) userpageLink.style.display = '';
+
+    // Ajoute un bouton de déconnexion si connecté
+    const logoutBtn = document.createElement('button');
+    logoutBtn.textContent = 'Logout';
+    logoutBtn.className = 'btn logout-btn';
+    logoutBtn.onclick = () => {
+      localStorage.removeItem('token');
+      location.reload();
+    };
+    document.querySelector('.navbar nav')?.appendChild(logoutBtn);
+  } else {
+    if (loginLink) loginLink.style.display = '';
+    if (registerLink) registerLink.style.display = '';
+    if (userpageLink) userpageLink.style.display = 'none';
+  }
+
+if (searchBtn) {
   searchBtn.addEventListener('click', () => {
     const query = searchInput.value.trim();
     searchGames(query);
   });
+}
+
 
   searchInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
