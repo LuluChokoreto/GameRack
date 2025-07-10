@@ -1,6 +1,10 @@
 const { Sequelize, DataTypes, Model } = require('sequelize');
 
-const sequelize = new Sequelize(
+const isTest = process.env.NODE_ENV === 'test';
+
+const sequelize = isTest 
+  ? new Sequelize('sqlite::memory:', {logging: false}) 
+  :new Sequelize(
   process.env.DBNAME,
   process.env.DBUSER,
   process.env.DBPASS,
@@ -107,4 +111,6 @@ async function insertDefaultDevGames() {
   }
 }
 
-sequelize.sync().then(insertDefaultDevGames);
+if (process.env.NODE_ENV !== 'test') {
+  sequelize.sync().then(insertDefaultDevGames);
+}
